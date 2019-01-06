@@ -23,7 +23,7 @@ class App extends Component {
   changePAndL = (e) => { this.setState({ pAndL: e })}
 
   renderView = () => {
-    const { view } = this.state
+    const { view, down, taxes, insurance, pAndL } = this.state
     if (view === 'form') {
         return (
         <View style={Styles.styles.mainApp}>
