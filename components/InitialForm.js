@@ -67,15 +67,15 @@ class InitialForm extends Component {
         super(props);
     }
 
-    calculateTaxes = (home, taxes) => {
-        const { changeTaxes } = this.props;
-        const decimal = taxes.slice(0, -1);
-        let percent = decimal / 100;
-        let difference = home * percent;
-        let tax = difference / 12;
-        let final = tax.toLocaleString();
-        changeTaxes(Math.round(final * 100) / 100)
-    }
+    // calculateTaxes = (home, taxes) => {
+    //     const { changeTaxes } = this.props;
+    //     const decimal = taxes.slice(0, -1);
+    //     let percent = decimal / 100;
+    //     let difference = home * percent;
+    //     let tax = difference / 12;
+    //     let final = tax.toLocaleString();
+    //     changeTaxes(Math.round(final * 100) / 100)
+    // }
 
     calculateDownPayment = (home, down) => {
         const { viewChange, downChange } = this.props
@@ -87,66 +87,52 @@ class InitialForm extends Component {
         downChange(final);
     }
 
-    calculateInsurance = (home, insurance) => {
-        const { changeInsurance } = this.props
-        let decimal = insurance.slice(0, -1);
-        let percent = decimal / 100
-        let difference = home * percent;
-        let insure = difference / 12;
-        let final = insure.toLocaleString();
-        changeInsurance(Math.round(final * 100) / 100);
-    }
-
-    // calculatePAndL = (home, term, int, down) => {
-    //     //NOT 100% ACCURATE!!!! NEEDS WORK!!!
-    //     const { changePAndL } = this.props
-    //     let decimal = down.slice(0, -1);
-    //     let percent = decimal / 100;
-    //     let downPayment = home * percent;
-    //     let principal = home - downPayment;
-    //     let n = term * 12;
-    //     let r = int.slice(0, -1) / 12
-    //     let rRounded = Math.round(r * 100) / 100
-    //     let topParen = 1 + rRounded
-    //     let topParenRound = Math.round(topParen * 100) / 100
-    //     let topPow = Math.pow(topParenRound, n);
-    //     let topPower = JSON.stringify(topPow)
-    //     let topPowStr = topPower.slice(0, -4)
-    //     let topPowRound = Math.round(topPowStr * 100 ) / 100
-    //     let topSolution = rRounded * topPowRound
-    //     let bottomParen = 1 + rRounded
-    //     let bottomParenRound = Math.round(bottomParen * 100) / 100
-    //     let bottomPow = Math.pow(bottomParenRound, n);
-    //     let bottomPower = JSON.stringify(bottomPow);
-    //     let bottomPowerStr = bottomPower.slice(0, -4);
-    //     let bottomPowRound = Math.round(bottomPowerStr * 100) / 100;
-    //     let bottomSolution = bottomPowRound - 1
-    //     let formulaTotal = topSolution / bottomSolution
-    //     let formulaRound = Math.round(formulaTotal * 100) / 100;
-    //     let solution = principal * formulaRound;
-    //     let solutionStr = JSON.stringify(solution);
-    //     let solutionArr = solutionStr.split('');
-    //     solutionArr.splice(-2, 0, '.')
-    //     let pAndL = solutionArr.join("")
-    //     console.log(pAndL)
-    //     //NOT 1000% ACCURATE!!! NEEDS WORK!!!
+    // calculateInsurance = (home, insurance) => {
+    //     const { changeInsurance } = this.props
+    //     let decimal = insurance.slice(0, -1);
+    //     let percent = decimal / 100
+    //     let difference = home * percent;
+    //     let insure = difference / 12;
+    //     let final = insure.toLocaleString();
+    //     changeInsurance(Math.round(final * 100) / 100);
     // }
 
-    calculatePAndL = (home, term, int, down) => {
-        console.log('P&L NEEDS WORK')
+    calculateAll = (home, down, taxes, insurance, interest) => {
+        const { changeTaxes, changeInsurance, changePAndL } = this.props;
+
+        //TAXES
+        let taxesDecimal = taxes.slice(0, -1);
+        let taxesPercent = taxesDecimal / 100;
+        let taxesDifference = home * taxesPercent;
+        let tax = taxesDifference / 12;
+        let finalTaxes = tax.toLocaleString();
+        let finalRoundedTaxes = Math.round(finalTaxes * 100) / 100 // <===== TAX OUTPUT
+        changeTaxes(finalRoundedTaxes);
+
+        //INSURANCE
+        let insuranceDecimal = insurance.slice(0, -1);
+        let insurancePercent = insuranceDecimal / 100
+        let insuranceDifference = home * insurancePercent;
+        let insure = insuranceDifference / 12;
+        let final = insure.toLocaleString();
+        let finalRoundedInsurance = Math.round(final * 100) / 100; // <==== INSURANCE OUTPUT
+        changeInsurance(finalRoundedInsurance);
+
+        //P AND L
+        let PAndLDecimal = interest.slice(0, -1)
+        let PAndLPercent = PAndLDecimal / 100
+        let PAndLInterest = PAndLPercent / 12
+        let PAndLMonthly = PAndLInterest * home
+        let PAndLTotal = PAndLMonthly + finalRoundedInsurance + finalRoundedTaxes
+        let PAndLTotalRounded = Math.round(PAndLTotal * 100) / 100
+        changePAndL(PAndLTotalRounded);
     }
 
-    strip = (number) => {
-        let num = parseFloat(number).toPrecision(12)
-        console.log(num);
-    }
 
     handleSubmit = () => {
         const value = this._form.getValue(); // use that ref to get the form value
         this.calculateDownPayment(value.homePrice, value.downPayment)
-        this.calculateTaxes(value.homePrice, value.taxes);
-        this.calculateInsurance(value.homePrice, value.hazardInsurance);
-        this.calculatePAndL(value.homePrice, value.term, value.interestRate, value.downPayment);
+        this.calculateAll(value.homePrice, value.downPayment, value.taxes, value.hazardInsurance, value.interestRate);
     }
 
     resetForm = () => {

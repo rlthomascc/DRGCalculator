@@ -16,20 +16,22 @@ class Output extends Component {
 
 
     output() {
-        const {viewChange, down, taxes, insurance} = this.props;
+        const {viewChange, down, taxes, insurance, pAndL} = this.props;
         return (
             <View>
                 <Text style={Styles.styles.titleText}>
                     Down Payment:
                     ${down}
-                    {/* line break */}
                     {"\n"}
-                    {/* line break */}
+                    P&L:
+                    ${pAndL}
+                    {"\n"}
                     Taxes:
                     ${taxes}
                     {"\n"}
                     Insurance:
                     ${insurance}
+                    {"\n"}
                 </Text>
                 <View style={Styles.styles.button}>
                 <Button
