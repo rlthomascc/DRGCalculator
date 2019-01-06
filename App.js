@@ -9,35 +9,43 @@ class App extends Component {
     super(props);
     this.state = {
       down: '',
-      view: 'form'
+      view: 'form',
+      taxes: '',
+      insurance: '',
+      pAndL: '',
     }
   }
 
-  changeDown = (e) => {
-    this.setState({
-      down: e
-    })
-  }
-
-  changeView = (e) => {
-    this.setState({
-      view: e
-    });
-  }
+  changeTaxes = (e) => { this.setState({ taxes: e })}
+  changeDown = (e) => { this.setState({ down: e })}
+  changeView = (e) => { this.setState({ view: e })}
+  changeInsurance = (e) => { this.setState({ insurance: e })}
+  changePAndL = (e) => { this.setState({ pAndL: e })}
 
   renderView = () => {
     const { view } = this.state
     if (view === 'form') {
         return (
         <View style={Styles.styles.mainApp}>
-          <InitialForm viewChange={this.changeView} downChange={this.changeDown}/>
+          <InitialForm viewChange={this.changeView}
+          downChange={this.changeDown}
+          changeTaxes={this.changeTaxes}
+          changeInsurance={this.changeInsurance}
+          changePAndL={this.changePAndL}
+          />
         </View>
         )
     }
     if (view === 'output') {
+      const {down, taxes, insurance, pAndL} = this.state
         return (
         <View style={Styles.styles.mainApp}>
-          <Output viewChange={this.changeView} down={this.state.down}/>
+          <Output viewChange={this.changeView}
+          down={down}
+          taxes={taxes}
+          insurance={insurance}
+          pAndL={pAndL}
+          />
         </View>
         )
     }
