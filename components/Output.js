@@ -23,7 +23,7 @@ class Output extends Component {
                     Down Payment:
                     ${down}
                     {"\n"}
-                    P&L:
+                    P&I:
                     ${pAndL}
                     {"\n"}
                     Taxes:
