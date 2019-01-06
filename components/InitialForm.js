@@ -75,7 +75,7 @@ class InitialForm extends Component {
         let downPayment = Math.round(home * percent);
         let final = downPayment.toLocaleString()
         viewChange('output')
-        downChange('final')
+        downChange(final)
     }
 
     handleSubmit = () => {
