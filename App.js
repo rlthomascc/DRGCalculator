@@ -1,5 +1,6 @@
+/* eslint-disable react/jsx-filename-extension */
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { View } from 'react-native';
 import InitialForm from './components/InitialForm';
 import Output from './components/Output';
 import Styles from './styling/styles';
@@ -13,43 +14,51 @@ class App extends Component {
       taxes: '',
       insurance: '',
       pAndL: '',
-    }
+    };
   }
 
-  changeTaxes = (e) => { this.setState({ taxes: e })}
-  changeDown = (e) => { this.setState({ down: e })}
-  changeView = (e) => { this.setState({ view: e })}
-  changeInsurance = (e) => { this.setState({ insurance: e })}
-  changePAndL = (e) => { this.setState({ pAndL: e })}
+  changeTaxes = (e) => { this.setState({ taxes: e }); };
+
+  changeDown = (e) => { this.setState({ down: e }); };
+
+  changeView = (e) => { this.setState({ view: e }); };
+
+  changeInsurance = (e) => { this.setState({ insurance: e }); };
+
+  changePAndL = (e) => { this.setState({ pAndL: e }); };
 
   renderView = () => {
-    const { view, down, taxes, insurance, pAndL } = this.state
+    const { view } = this.state;
     if (view === 'form') {
-        return (
+      return (
         <View style={Styles.styles.mainApp}>
-          <InitialForm viewChange={this.changeView}
-          downChange={this.changeDown}
-          changeTaxes={this.changeTaxes}
-          changeInsurance={this.changeInsurance}
-          changePAndL={this.changePAndL}
+          <InitialForm
+            viewChange={this.changeView}
+            downChange={this.changeDown}
+            changeTaxes={this.changeTaxes}
+            changeInsurance={this.changeInsurance}
+            changePAndL={this.changePAndL}
           />
         </View>
-        )
+      );
     }
     if (view === 'output') {
-      const {down, taxes, insurance, pAndL} = this.state
-        return (
+      const {
+        down, taxes, insurance, pAndL,
+      } = this.state;
+      return (
         <View style={Styles.styles.mainApp}>
-          <Output viewChange={this.changeView}
-          down={down}
-          taxes={taxes}
-          insurance={insurance}
-          pAndL={pAndL}
+          <Output
+            viewChange={this.changeView}
+            down={down}
+            taxes={taxes}
+            insurance={insurance}
+            pAndL={pAndL}
           />
         </View>
-        )
+      );
     }
-}
+  }
 
   render() {
     return (
@@ -59,4 +68,4 @@ class App extends Component {
 }
 
 
-export default App
+export default App;
