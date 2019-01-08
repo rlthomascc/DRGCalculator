@@ -14,6 +14,7 @@ class App extends Component {
       taxes: '',
       insurance: '',
       pAndL: '',
+      prepaids: '',
     };
   }
 
@@ -27,6 +28,8 @@ class App extends Component {
 
   changePAndL = (e) => { this.setState({ pAndL: e }); };
 
+  changePrepaids = (e) => { this.setState({ prepaids: e }); };
+
   renderView = () => {
     const { view } = this.state;
     if (view === 'form') {
@@ -38,13 +41,14 @@ class App extends Component {
             changeTaxes={this.changeTaxes}
             changeInsurance={this.changeInsurance}
             changePAndL={this.changePAndL}
+            changePrepaids={this.changePrepaids}
           />
         </View>
       );
     }
     if (view === 'output') {
       const {
-        down, taxes, insurance, pAndL,
+        down, taxes, insurance, pAndL, prepaids,
       } = this.state;
       return (
         <View style={Styles.styles.mainApp}>
@@ -54,6 +58,7 @@ class App extends Component {
             taxes={taxes}
             insurance={insurance}
             pAndL={pAndL}
+            prepaids={prepaids}
           />
         </View>
       );
