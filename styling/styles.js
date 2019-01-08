@@ -7,7 +7,6 @@ const styles = StyleSheet.create({
     marginTop: 50,
     marginBottom: 50,
     padding: 30,
-    width: 320,
   },
   button: {
     justifyContent: 'center',
@@ -16,6 +15,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   titleText: {
+    marginTop: 200,
     textAlign: 'center',
     fontSize: 25,
     fontWeight: 'bold',

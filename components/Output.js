@@ -1,13 +1,12 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-useless-constructor */
+/* eslint-disable react/jsx-filename-extension */
 import React, { Component } from 'react';
 import {
   View,
-  TextInput,
   Button,
   Text,
-  StyleSheet,
-  ScrollView,
 } from 'react-native';
-import t from 'tcomb-form-native';
 import Styles from '../styling/styles';
 
 class Output extends Component {

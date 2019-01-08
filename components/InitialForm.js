@@ -1,3 +1,6 @@
+/* eslint-disable no-shadow */
+/* eslint-disable consistent-return */
+/* eslint-disable no-return-assign */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/jsx-filename-extension */
 /* eslint-disable no-useless-constructor */
@@ -5,13 +8,11 @@
 import React, { Component } from 'react';
 import {
   View,
-  TextInput,
   Button,
-  Text,
-  StyleSheet,
   ScrollView,
 } from 'react-native';
 import t from 'tcomb-form-native';
+import Output from './Output';
 import Styles from '../styling/styles';
 
 
@@ -69,43 +70,40 @@ const value = {
 class InitialForm extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      down: '',
+      view: 'form',
+      taxes: '',
+      insurance: '',
+      pAndL: '',
+      prepaids: '',
+    };
   }
 
-  // calculateTaxes = (home, taxes) => {
-  //     const { changeTaxes } = this.props;
-  //     const decimal = taxes.slice(0, -1);
-  //     let percent = decimal / 100;
-  //     let difference = home * percent;
-  //     let tax = difference / 12;
-  //     let final = tax.toLocaleString();
-  //     changeTaxes(Math.round(final * 100) / 100)
-  // }
+  changeTaxes = (e) => { this.setState({ taxes: e }); };
+
+  changeDown = (e) => { this.setState({ down: e }); };
+
+  changeView = (e) => { this.setState({ view: e }); };
+
+  changeInsurance = (e) => { this.setState({ insurance: e }); };
+
+  changePAndI = (e) => { this.setState({ pAndL: e }); };
+
+  changePrepaids = (e) => { this.setState({ prepaids: e }); };
+
 
     calculateDownPayment = (home, down) => {
-      const { viewChange, downChange } = this.props;
       const decimal = down.slice(0, -1);
       const percent = decimal / 100;
       const downPayment = Math.round(home * percent);
       const final = downPayment.toLocaleString();
-      viewChange('output');
-      downChange(final);
+      this.changeView('output');
+      this.changeDown(final);
     }
 
-    // calculateInsurance = (home, insurance) => {
-    //     const { changeInsurance } = this.props
-    //     let decimal = insurance.slice(0, -1);
-    //     let percent = decimal / 100
-    //     let difference = home * percent;
-    //     let insure = difference / 12;
-    //     let final = insure.toLocaleString();
-    //     changeInsurance(Math.round(final * 100) / 100);
-    // }
 
     calculateAll = (home, down, taxes, insurance, interest, term) => {
-      const {
-        changeTaxes, changeInsurance, changePAndL, changePrepaids,
-      } = this.props;
-
       // TAXES
       const taxesDecimal = taxes.slice(0, -1);
       const taxesPercent = taxesDecimal / 100;
@@ -113,7 +111,7 @@ class InitialForm extends Component {
       const tax = taxesDifference / 12;
       const finalTaxes = tax.toLocaleString();
       const finalRoundedTaxes = Math.round(finalTaxes * 100) / 100; // <===== TAX OUTPUT
-      changeTaxes(finalRoundedTaxes);
+      this.changeTaxes(finalRoundedTaxes);
 
       // INSURANCE
       const insuranceDecimal = insurance.slice(0, -1);
@@ -122,7 +120,7 @@ class InitialForm extends Component {
       const insure = insuranceDifference / 12;
       const final = insure.toLocaleString();
       const finalRoundedInsurance = Math.round(final * 100) / 100; // <==== INSURANCE OUTPUT
-      changeInsurance(finalRoundedInsurance);
+      this.changeInsurance(finalRoundedInsurance);
 
       // P AND I
       const PAndLDecimal = interest.slice(0, -1);
@@ -131,7 +129,7 @@ class InitialForm extends Component {
       const PAndLMonthly = PAndLInterest * home;
       const PAndLTotal = PAndLMonthly + finalRoundedInsurance + finalRoundedTaxes;
       const PAndLTotalRounded = Math.round(PAndLTotal * 100) / 100;
-      changePAndL(PAndLTotalRounded);
+      this.changePAndI(PAndLTotalRounded);
 
       // PREPAIDS
       const prepaidInterestPerc = interest.slice(0, -1);
@@ -158,7 +156,7 @@ class InitialForm extends Component {
       const prepaidFinalRounded = Math.round(prepaidFinal * 100) / 100;
       const prepaidInsuranceTotal = prepaidFinalRounded * 14; // <====== INSURANCE
       const Prepaids = prepaidInterestTotal + prepaidTaxesTotal + prepaidInsuranceTotal;
-      changePrepaids(Prepaids);
+      this.changePrepaids(Prepaids);
     }
 
 
@@ -174,29 +172,50 @@ class InitialForm extends Component {
         value.term);
     }
 
-    form = () => (
-      <ScrollView>
-        <View style={Styles.styles.container}>
-          <Form
-            ref={c => this._form = c}
-            type={User}
-            options={options}
-            value={value}
+
+    renderView = () => {
+      const { view } = this.state;
+      if (view === 'form') {
+        return (
+          <ScrollView>
+            <View style={Styles.styles.container}>
+              <Form
+                ref={c => this._form = c}
+                type={User}
+                options={options}
+                value={value}
+              />
+              <View style={Styles.styles.button}>
+                <Button
+                  title="Calculate"
+                  onPress={this.handleSubmit}
+                  color="white"
+                />
+              </View>
+            </View>
+          </ScrollView>
+        );
+      }
+      if (view === 'output') {
+        const {
+          down, taxes, insurance, pAndL, prepaids,
+        } = this.state;
+        return (
+          <Output
+            viewChange={this.changeView}
+            down={down}
+            taxes={taxes}
+            insurance={insurance}
+            pAndL={pAndL}
+            prepaids={prepaids}
           />
-          <View style={Styles.styles.button}>
-            <Button
-              title="Calculate"
-              onPress={this.handleSubmit}
-              color="white"
-            />
-          </View>
-        </View>
-      </ScrollView>
-    )
+        );
+      }
+    }
 
     render() {
       return (
-        this.form()
+        this.renderView()
       );
     }
 }
