@@ -1,73 +1,16 @@
+/* eslint-disable react/prefer-stateless-function */
 /* eslint-disable react/jsx-filename-extension */
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import InitialForm from './components/InitialForm';
 import Output from './components/Output';
 import Styles from './styling/styles';
+import Navbar from './navigation/NavbarRouting';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      down: '',
-      view: 'form',
-      taxes: '',
-      insurance: '',
-      pAndL: '',
-      prepaids: '',
-    };
-  }
-
-  changeTaxes = (e) => { this.setState({ taxes: e }); };
-
-  changeDown = (e) => { this.setState({ down: e }); };
-
-  changeView = (e) => { this.setState({ view: e }); };
-
-  changeInsurance = (e) => { this.setState({ insurance: e }); };
-
-  changePAndL = (e) => { this.setState({ pAndL: e }); };
-
-  changePrepaids = (e) => { this.setState({ prepaids: e }); };
-
-  renderView = () => {
-    const { view } = this.state;
-    if (view === 'form') {
-      return (
-        <View style={Styles.styles.mainApp}>
-          <InitialForm
-            viewChange={this.changeView}
-            downChange={this.changeDown}
-            changeTaxes={this.changeTaxes}
-            changeInsurance={this.changeInsurance}
-            changePAndL={this.changePAndL}
-            changePrepaids={this.changePrepaids}
-          />
-        </View>
-      );
-    }
-    if (view === 'output') {
-      const {
-        down, taxes, insurance, pAndL, prepaids,
-      } = this.state;
-      return (
-        <View style={Styles.styles.mainApp}>
-          <Output
-            viewChange={this.changeView}
-            down={down}
-            taxes={taxes}
-            insurance={insurance}
-            pAndL={pAndL}
-            prepaids={prepaids}
-          />
-        </View>
-      );
-    }
-  }
-
   render() {
     return (
-      this.renderView()
+      <Navbar />
     );
   }
 }
