@@ -101,8 +101,10 @@ class InitialForm extends Component {
     //     changeInsurance(Math.round(final * 100) / 100);
     // }
 
-    calculateAll = (home, down, taxes, insurance, interest) => {
-      const { changeTaxes, changeInsurance, changePAndL } = this.props;
+    calculateAll = (home, down, taxes, insurance, interest, term) => {
+      const {
+        changeTaxes, changeInsurance, changePAndL, changePrepaids,
+      } = this.props;
 
       // TAXES
       const taxesDecimal = taxes.slice(0, -1);
@@ -122,7 +124,7 @@ class InitialForm extends Component {
       const finalRoundedInsurance = Math.round(final * 100) / 100; // <==== INSURANCE OUTPUT
       changeInsurance(finalRoundedInsurance);
 
-      // P AND L
+      // P AND I
       const PAndLDecimal = interest.slice(0, -1);
       const PAndLPercent = PAndLDecimal / 100;
       const PAndLInterest = PAndLPercent / 12;
@@ -130,6 +132,33 @@ class InitialForm extends Component {
       const PAndLTotal = PAndLMonthly + finalRoundedInsurance + finalRoundedTaxes;
       const PAndLTotalRounded = Math.round(PAndLTotal * 100) / 100;
       changePAndL(PAndLTotalRounded);
+
+      // PREPAIDS
+      const prepaidInterestPerc = interest.slice(0, -1);
+      const prepaidInterestDec = prepaidInterestPerc / 100;
+      const prepaidDownpaymentPerc = down.slice(0, -1);
+      const prepaidDownpaymentDec = prepaidDownpaymentPerc / 100;
+      const prepaidDownpayment = Math.round((home * prepaidDownpaymentDec) * 100 / 100);
+      const prepaidPrincipal = home - prepaidDownpayment;
+      const prepaidNumberPayments = term * 12;
+      const prepaidInterest = Math.round(((prepaidInterestDec / prepaidNumberPayments) * prepaidPrincipal) * 100) / 100;
+      const prepaidInterestTotal = prepaidInterest * 30; // <========= INTEREST
+      const prepaidTaxDec = taxes.slice(0, -1);
+      const prepaidTaxPerc = prepaidTaxDec / 100;
+      const prepaidTaxDiff = home * prepaidTaxPerc;
+      const prepaidTaxTotal = prepaidTaxDiff / 12;
+      const prepaidTaxStr = prepaidTaxTotal.toLocaleString();
+      const prepaidTaxesFinal = Math.round(prepaidTaxStr * 100) / 100;
+      const prepaidTaxesTotal = prepaidTaxesFinal * 2; // <========= TAXES
+      const prepaidInsuranceDec = insurance.slice(0, -1);
+      const prepaidInsurancePerc = prepaidInsuranceDec / 100;
+      const prepaidDifference = home * prepaidInsurancePerc;
+      const prepaidInsurance = prepaidDifference / 12;
+      const prepaidFinal = prepaidInsurance.toLocaleString();
+      const prepaidFinalRounded = Math.round(prepaidFinal * 100) / 100;
+      const prepaidInsuranceTotal = prepaidFinalRounded * 14; // <====== INSURANCE
+      const Prepaids = prepaidInterestTotal + prepaidTaxesTotal + prepaidInsuranceTotal;
+      changePrepaids(Prepaids);
     }
 
 
@@ -141,7 +170,8 @@ class InitialForm extends Component {
         value.downPayment,
         value.taxes,
         value.hazardInsurance,
-        value.interestRate);
+        value.interestRate,
+        value.term);
     }
 
     form = () => (
