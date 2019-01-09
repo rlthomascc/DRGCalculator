@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   titleText: {
-    marginTop: 200,
+    marginTop: 20,
     textAlign: 'center',
     fontSize: 25,
     fontWeight: 'bold',
@@ -25,6 +25,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  aboutUs: {
+    justifyContent: 'center',
+    textAlign: 'center',
+    marginTop: 100,
+    marginBottom: 100,
+    padding: 30,
   },
 });
 

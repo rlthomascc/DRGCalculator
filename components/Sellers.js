@@ -1,10 +1,11 @@
+/* eslint-disable no-shadow */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-return-assign */
 /* eslint-disable prefer-destructuring */
 /* eslint-disable react/jsx-filename-extension */
 import React, { Component } from 'react';
 import {
-  View, ScrollView, Button,
+  View, ScrollView, Button, Image,
 } from 'react-native';
 import t from 'tcomb-form-native';
 import Styles from '../styling/styles';
@@ -70,7 +71,22 @@ class Sellers extends Component {
       if (view === 'form') {
         return (
           <ScrollView>
+
             <View style={Styles.styles.container}>
+
+              <View style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                paddingBottom: 10,
+              }}
+              >
+                <Image
+                  style={{ width: 150, height: 150 }}
+                  source={{ uri: 'http://static1.squarespace.com/static/558afaebe4b04871ce600780/t/558afbc9e4b01d698d1a354f/1435171786494/smaller.png?format=1500w' }}
+                />
+              </View>
+
+
               <Form
                 ref={c => this._form = c}
                 type={User}

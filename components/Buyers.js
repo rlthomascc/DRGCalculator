@@ -10,6 +10,7 @@ import {
   View,
   Button,
   ScrollView,
+  Image,
 } from 'react-native';
 import t from 'tcomb-form-native';
 import Output from './Output';
@@ -179,6 +180,18 @@ class Buyers extends Component {
         return (
           <ScrollView>
             <View style={Styles.styles.container}>
+              <View style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                paddingBottom: 10,
+              }}
+              >
+                <Image
+                  style={{ width: 150, height: 150 }}
+                  source={{ uri: 'http://static1.squarespace.com/static/558afaebe4b04871ce600780/t/558afbc9e4b01d698d1a354f/1435171786494/smaller.png?format=1500w' }}
+                />
+              </View>
+
               <Form
                 ref={c => this._form = c}
                 type={User}
