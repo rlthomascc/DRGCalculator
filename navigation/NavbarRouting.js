@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-filename-extension */
 /* eslint-disable react/prop-types */
 import React from 'react';
@@ -9,16 +10,17 @@ import { createMaterialBottomTabNavigator } from 'react-navigation-material-bott
 import Icon from 'react-native-vector-icons/Ionicons';
 import Buyers from '../components/Buyers';
 import Sellers from '../components/Sellers';
+import AboutUs from '../components/AboutUs';
 
 
-class Link extends React.Component {
-  render() {
-    const url = 'http://www.thedelrealgroup.com/';
-    return (
-      Linking.openURL(url).catch(err => console.error('An error occurred', err))
-    );
-  }
-}
+// class Link extends React.Component {
+//   render() {
+//     const url = 'http://www.thedelrealgroup.com/';
+//     return (
+//       Linking.openURL(url)
+//     );
+//   }
+// }
 
 
 export default createMaterialBottomTabNavigator({
@@ -27,7 +29,7 @@ export default createMaterialBottomTabNavigator({
     navigationOptions: {
       tabBarLabel: 'Buyers',
       tabBarIcon: ({ tintColor }) => (
-        <Icon name="ios-menu" color={tintColor} size={24} />
+        <Icon name="ios-home" color={tintColor} size={24} />
       ),
     },
   },
@@ -36,16 +38,16 @@ export default createMaterialBottomTabNavigator({
     navigationOptions: {
       tabBarLabel: 'Sellers',
       tabBarIcon: ({ tintColor }) => (
-        <Icon name="ios-menu" color={tintColor} size={24} />
+        <Icon name="ios-pricetags" color={tintColor} size={24} />
       ),
     },
   },
   DelRealGroup: {
-    screen: Link,
+    screen: AboutUs,
     navigationOptions: {
       tabBarLabel: 'Del Real Group',
       tabBarIcon: ({ tintColor }) => (
-        <Icon name="ios-link" color={tintColor} size={24} />
+        <Icon name="ios-key" color={tintColor} size={24} />
       ),
     },
   },
