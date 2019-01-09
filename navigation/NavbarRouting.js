@@ -7,8 +7,9 @@ import {
 // import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
-import InitialForm from '../components/InitialForm';
-import Output from '../components/Output';
+import Buyers from '../components/Buyers';
+import Sellers from '../components/Sellers';
+
 
 class Link extends React.Component {
   render() {
@@ -22,20 +23,20 @@ class Link extends React.Component {
 
 export default createMaterialBottomTabNavigator({
   Form: {
-    screen: InitialForm,
+    screen: Buyers,
     navigationOptions: {
-      tabBarLabel: 'Form',
+      tabBarLabel: 'Buyers',
       tabBarIcon: ({ tintColor }) => (
         <Icon name="ios-menu" color={tintColor} size={24} />
       ),
     },
   },
   Test: {
-    screen: Output,
+    screen: Sellers,
     navigationOptions: {
-      tabBarLabel: 'Output',
+      tabBarLabel: 'Sellers',
       tabBarIcon: ({ tintColor }) => (
-        <Icon name="ios-information-circle" color={tintColor} size={24} />
+        <Icon name="ios-menu" color={tintColor} size={24} />
       ),
     },
   },
