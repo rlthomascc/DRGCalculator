@@ -54,7 +54,7 @@ const User = t.struct({
   hazardInsurance: t.String,
   taxes: t.String,
   hoa: t.maybe(t.Number),
-  closingDate: t.Date,
+  closingDate: t.maybe(t.Date),
 });
 
 const value = {
@@ -67,7 +67,7 @@ const value = {
 };
 
 
-class InitialForm extends Component {
+class Buyers extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -220,4 +220,4 @@ class InitialForm extends Component {
     }
 }
 
-export default InitialForm;
+export default Buyers;
