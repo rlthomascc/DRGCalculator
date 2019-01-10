@@ -17,8 +17,7 @@ const styles = StyleSheet.create({
   titleText: {
     marginTop: 20,
     textAlign: 'center',
-    fontSize: 25,
-    fontWeight: 'bold',
+    fontSize: 12,
   },
   mainApp: {
     flex: 1,
