@@ -18,7 +18,7 @@ class Output extends Component {
 
   output() {
     const {
-      viewChange, down, taxes, insurance, pAndL, prepaids, fixed,
+      viewChange, down, taxes, insurance, pAndL, prepaids, fixed, bringToClose,
     } = this.props;
     return (
       <View style={{
@@ -39,6 +39,11 @@ class Output extends Component {
         </View>
 
         <Text style={Styles.styles.titleText}>
+
+        Bring To Close:
+        $
+          {bringToClose}
+          {'\n'}
 
         Down Payment:
                     $
