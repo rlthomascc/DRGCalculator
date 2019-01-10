@@ -60,9 +60,17 @@ class Sellers extends Component {
     };
   }
 
+  changeView = (e) => { this.setState({ view: e }); }
+
   handleSubmit = () => {
     const value = this._form.getValue(); // use that ref to get the form value
+    this.calculateMethods(value);
+    this.changeView('output');
     console.log(value, 'hello!');
+  }
+
+  calculateMethods = (value) => {
+    console.log(value);
   }
 
 
@@ -106,7 +114,9 @@ class Sellers extends Component {
       }
       if (view === 'output') {
         return (
-          <SellerOutput />
+          <SellerOutput
+            changeView={this.changeView}
+          />
         );
       }
       return 'oops';

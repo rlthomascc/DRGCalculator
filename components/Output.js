@@ -18,7 +18,7 @@ class Output extends Component {
 
   output() {
     const {
-      viewChange, down, taxes, insurance, pAndL, prepaids,
+      viewChange, down, taxes, insurance, pAndL, prepaids, fixed,
     } = this.props;
     return (
       <View style={{
@@ -40,28 +40,43 @@ class Output extends Component {
 
         <Text style={Styles.styles.titleText}>
 
-
-                    Down Payment:
+        Down Payment:
                     $
           {down}
           {'\n'}
+
+          Prepaids:
+          $
+          {prepaids}
+          {'\n'}
+          Fixed:
+          $
+          {fixed}
+
+          {'\n'}
+          CLOSING COST LINK
+
+        </Text>
+
+
+        <Text style={Styles.styles.titleText}>
                     P&I:
                     $
           {pAndL}
-          {'\n'}
-                    Taxes:
-                    $
-          {taxes}
           {'\n'}
                     Insurance:
                     $
           {insurance}
           {'\n'}
-          Prepaids:
-          $
-          {prepaids}
+                    Taxes:
+                    $
+          {taxes}
+          {'\n'}
+                    MIP:
           {'\n'}
         </Text>
+
+
         <View style={Styles.styles.button}>
           <Button
             title="Reset Form"

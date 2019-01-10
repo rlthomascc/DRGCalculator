@@ -78,6 +78,7 @@ class Buyers extends Component {
       insurance: '',
       pAndL: '',
       prepaids: '',
+      fixed: '',
     };
   }
 
@@ -92,6 +93,8 @@ class Buyers extends Component {
   changePAndI = (e) => { this.setState({ pAndL: e }); };
 
   changePrepaids = (e) => { this.setState({ prepaids: e }); };
+
+  changeFixed = (e) => { this.setState({ fixed: e }); };
 
 
     calculateDownPayment = (home, down) => {
@@ -158,6 +161,16 @@ class Buyers extends Component {
       const prepaidInsuranceTotal = prepaidFinalRounded * 14; // <====== INSURANCE
       const Prepaids = prepaidInterestTotal + prepaidTaxesTotal + prepaidInsuranceTotal;
       this.changePrepaids(Prepaids);
+
+      // FIXED
+      const item1 = 0;
+      const item2 = 0;
+      const item3 = 0;
+      const item4 = 0;
+      const fixed = item1 + item2 + item3 + 25 + 340 + 150 + 22 + 325 + 400 + 65 + 65 + 295 + 125 + 450 + 192 - item4;
+      console.log(fixed, 'fixed costs');
+
+      this.changeFixed(fixed);
     }
 
 
@@ -211,7 +224,7 @@ class Buyers extends Component {
       }
       if (view === 'output') {
         const {
-          down, taxes, insurance, pAndL, prepaids,
+          down, taxes, insurance, pAndL, prepaids, fixed,
         } = this.state;
         return (
           <Output
@@ -221,6 +234,7 @@ class Buyers extends Component {
             insurance={insurance}
             pAndL={pAndL}
             prepaids={prepaids}
+            fixed={fixed}
           />
         );
       }
