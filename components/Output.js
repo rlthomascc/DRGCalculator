@@ -18,7 +18,7 @@ class Output extends Component {
 
   output() {
     const {
-      viewChange, down, taxes, insurance, pAndL, prepaids, fixed, bringToClose,
+      viewChange, down, taxes, insurance, pAndL, prepaids, fixed, bringToClose, mip,
     } = this.props;
     return (
       <View style={{
@@ -78,7 +78,9 @@ class Output extends Component {
           {taxes}
           {'\n'}
                     MIP:
+          {mip}
           {'\n'}
+
         </Text>
 
 
