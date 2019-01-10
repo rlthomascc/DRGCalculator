@@ -15,7 +15,6 @@ import {
 import t from 'tcomb-form-native';
 import Output from './Output';
 import Styles from '../styling/styles';
-// import Helpers from '../helperFunctions/helpers';
 import Calcs from '../helperFunctions/calculations';
 
 
