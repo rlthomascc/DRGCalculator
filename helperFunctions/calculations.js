@@ -1,5 +1,5 @@
+/* eslint-disable no-undef */
 // DOWN PAYMENT CALCULATIONS
-import Buyers from '../components/Buyers';
 import Helpers from './helpers';
 
 calculateDownPayment = (home, down, callback) => {
