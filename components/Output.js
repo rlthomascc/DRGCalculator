@@ -16,7 +16,7 @@ class Output extends Component {
   }
 
 
-  output() {
+  output = () => {
     const {
       viewChange, down, taxes, insurance, pAndL, prepaids, fixed, bringToClose, mip,
     } = this.props;
@@ -58,10 +58,19 @@ class Output extends Component {
           $
           {fixed}
 
-          {'\n'}
-          CLOSING COST LINK
 
         </Text>
+
+        <View>
+          <Button
+            title="Closing Costs >"
+            onPress={() => viewChange('closingCosts')}
+            color="blue"
+          >
+CLOSING COST LINK
+
+          </Button>
+        </View>
 
 
         <Text style={Styles.styles.titleText}>
@@ -94,6 +103,7 @@ class Output extends Component {
       </View>
     );
   }
+
 
   render() {
     return (
