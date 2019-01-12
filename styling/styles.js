@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   titleText: {
     marginTop: 20,
     textAlign: 'center',
-    fontSize: 12,
+    fontSize: 18,
   },
   mainApp: {
     flex: 1,
@@ -31,6 +31,16 @@ const styles = StyleSheet.create({
     marginTop: 100,
     marginBottom: 100,
     padding: 30,
+  },
+  table: {
+    flex: 1,
+    marginTop: 100,
+    alignSelf: 'stretch',
+    flexDirection: 'row',
+  },
+  row: {
+    flex: 1,
+    alignSelf: 'stretch',
   },
 });
 

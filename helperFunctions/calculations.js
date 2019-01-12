@@ -121,7 +121,7 @@ calculateAll = (home, down, taxes, insurance, interest, term, callback) => {
   const downPaymentRound = Math.round(home * downPaymentPercent);
   const bringToClose = fixedRounded + Prepaids + downPaymentRound;
   const bringToCloseRounded = Math.round(bringToClose * 100) / 100;
-  callback(finalRoundedTaxes, MIPround, finalRoundedInsurance, PAndLTotalRounded, Prepaids, fixedRounded, bringToCloseRounded);
+  callback(finalRoundedTaxes, MIPround, finalRoundedInsurance, PAndLTotalRounded, Prepaids, fixedRounded, bringToCloseRounded, lenderTitlePolicy, escrowFeeTotal, originatorFee, proratedTaxCredit, prepaidInsuranceTotal, prepaidTaxesTotal, prepaidInterestTotal);
 };
 
 

@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 import t from 'tcomb-form-native';
 import Output from './Output';
+import ClosingCosts from './ClosingCosts';
 import Styles from '../styling/styles';
 import Calcs from '../helperFunctions/calculations';
 
@@ -73,8 +74,8 @@ class Buyers extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      down: '',
       view: 'form',
+      down: '',
       taxes: '',
       insurance: '',
       pAndL: '',
@@ -82,6 +83,7 @@ class Buyers extends Component {
       fixed: '',
       bringToClose: '',
       mip: '',
+      closingCosts: {},
     };
   }
 
@@ -103,7 +105,22 @@ class Buyers extends Component {
 
   changeMIP = (e) => { this.setState({ mip: e }); }
 
-  dataBack = (tax, mip, insurance, pAndI, prepaids, fixed, bringToClose) => {
+  changeClosingCosts = (lendersTitlePolicy, escrowFee, origFee, proratedTax, prepaidInsurance, prepaidTaxes, prepaidInterest) => {
+    this.setState({
+      closingCosts: {
+        lendersTitlePoicy: { lendersTitlePolicy },
+        escrowFee: { escrowFee },
+        origFee: { origFee },
+        proratedTax: { proratedTax },
+        prepaidInsurance: { prepaidInsurance },
+        prepaidTaxes: { prepaidTaxes },
+        prepaidInterest: { prepaidInterest },
+      },
+    });
+  }
+
+
+  dataBack = (tax, mip, insurance, pAndI, prepaids, fixed, bringToClose, lendersTitlePolicy, escrowFee, origFee, proratedTax, prepaidInsurance, prepaidTaxes, prepaidInterest) => {
     this.changeTaxes(tax);
     this.changeInsurance(insurance);
     this.changePAndI(pAndI);
@@ -111,6 +128,7 @@ class Buyers extends Component {
     this.changeFixed(fixed);
     this.bringToClose(bringToClose);
     this.changeMIP(mip);
+    this.changeClosingCosts(lendersTitlePolicy, escrowFee, origFee, proratedTax);
   }
 
   downBack = (view, down) => {
@@ -181,6 +199,17 @@ class Buyers extends Component {
             fixed={fixed}
             bringToClose={bringToClose}
             mip={mip}
+          />
+        );
+      }
+      if (view === 'closingCosts') {
+        const {
+          closingCosts,
+        } = this.state;
+        return (
+          <ClosingCosts
+            viewChange={this.changeView}
+            closingCosts={closingCosts}
           />
         );
       }
