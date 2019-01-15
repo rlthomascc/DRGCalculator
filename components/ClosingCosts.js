@@ -1,3 +1,7 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-useless-constructor */
+/* eslint-disable react/jsx-filename-extension */
+/* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import {
   Text, View, ScrollView, Button, ListView,
@@ -11,31 +15,31 @@ class ClosingCosts extends Component {
 
 
   render() {
-    const { closingCosts } = this.props;
+    const { closingCosts, viewChange } = this.props;
     return (
       <ScrollView>
 
-        <View style={Styles.styles.titleText}>
-          <Text>
-            Prepaid Costs:
+        <View style={Styles.styles.container}>
+          <Text style={Styles.styles.closingCosts}>
+            <Text style={{ fontWeight: 'bold', fontSize: 18 }}>Prepaid Costs: </Text>
             {'\n'}
             14 Months Of Insurance: $
-            {closingCosts.prepaidInsurance}
+            {closingCosts.prepaidInsurance.prepaidInsurance}
             {'\n'}
             2 Months Of Taxes: $
-            {closingCosts.prepaidTaxes}
+            {closingCosts.prepaidTaxes.prepaidTaxes}
             {'\n'}
             30 Days Of Interest: $
-            {closingCosts.prepaidInterst}
+            {closingCosts.prepaidInterest.prepaidInterest}
             {'\n'}
             {'\n'}
-            Title Fees:
+            <Text style={{ fontWeight: 'bold', fontSize: 18 }}>Title Fees: </Text>
             {'\n'}
             Lender's Title Policy: $
-            {closingCosts.lendersTitlePolicy}
+            {closingCosts.lendersTitlePolicy.lendersTitlePolicy}
             {'\n'}
             Escrow Fee: $
-            {closingCosts.escrowFee}
+            {closingCosts.escrowFee.escrowFee}
             {'\n'}
             Endorsements: $25.00
             {'\n'}
@@ -48,10 +52,10 @@ class ClosingCosts extends Component {
             Whole House Inspection: $325.00
             {'\n'}
             {'\n'}
-            Lender Fees:
+            <Text style={{ fontWeight: 'bold', fontSize: 18 }}>Lender Fees: </Text>
             {'\n'}
             Origination Fee: $
-            {closingCosts.origFee}
+            {closingCosts.origFee.origFee}
             {'\n'}
             Processing/Funding Fee: $400.00
             {'\n'}
@@ -66,27 +70,26 @@ class ClosingCosts extends Component {
             Appraisal: $450.00
             {'\n'}
             {'\n'}
-            Other Fees:
+            <Text style={{ fontWeight: 'bold', fontSize: 16 }}>Other Fees: </Text>
             {'\n'}
             Prorated Tax Credit: -$
-            {closingCosts.proratedTax}
+            {closingCosts.proratedTax.proratedTax}
             {'\n'}
             RecordingFee: $192.00
 
           </Text>
+          <View style={Styles.styles.button}>
+            <Button
+              title="Go Back"
+              onPress={() => viewChange('output')}
+              color="white"
+            />
+          </View>
         </View>
 
       </ScrollView>
     );
   }
 }
-
-// lendersTitlePoicy: { lendersTitlePolicy },
-//         escrowFee: { escrowFee },
-//         origFee: { origFee },
-//         proratedTax: { proratedTax },
-//         prepaidInsurance: { prepaidInsurance },
-//         prepaidTaxes: { prepaidTaxes },
-//         prepaidInterest: { prepaidInterest },
 
 export default ClosingCosts;

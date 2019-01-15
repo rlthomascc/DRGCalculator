@@ -10,70 +10,27 @@ import {
   View,
   Button,
   ScrollView,
+  Text,
   Image,
+  Picker,
 } from 'react-native';
 import t from 'tcomb-form-native';
 import Output from './Output';
 import ClosingCosts from './ClosingCosts';
 import Styles from '../styling/styles';
 import Calcs from '../helperFunctions/calculations';
+import Values from '../helperFunctions/formValues';
 
 
 const Form = t.form.Form;
-const options = {
-  fields: {
-    maxFHA: {
-      label: 'Max FHA',
-    },
-    homePrice: {
-      label: 'Home Price',
-      placeholder: 'Required',
-    },
-    downPayment: {
-      label: 'Down Payment',
-    },
-    interestRate: {
-      label: 'Interest Rate',
-    },
-    hazardInsurance: {
-      label: 'Hazard Insurance',
-    },
-    hoa: {
-      label: 'HOA',
-    },
-    closingDate: {
-      label: 'Closing Date',
-    },
-  },
-};
 
-const User = t.struct({
-  maxFHA: t.String,
-  homePrice: t.Number,
-  downPayment: t.String,
-  interestRate: t.String,
-  term: t.String,
-  misc: t.maybe(t.Number),
-  hazardInsurance: t.String,
-  taxes: t.String,
-  hoa: t.maybe(t.Number),
-  closingDate: t.maybe(t.Date),
-});
-
-const value = {
-  maxFHA: '$350,750',
-  downPayment: '3.5%',
-  interestRate: '4.625%',
-  term: '30',
-  hazardInsurance: '0.35%',
-  taxes: '1.25%',
-};
-
+const loanPicker = ['Conventional', 'FHA', 'VA', 'Cash'];
 
 class Buyers extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      loan: 'Conventional',
       view: 'form',
       down: '',
       taxes: '',
@@ -108,7 +65,7 @@ class Buyers extends Component {
   changeClosingCosts = (lendersTitlePolicy, escrowFee, origFee, proratedTax, prepaidInsurance, prepaidTaxes, prepaidInterest) => {
     this.setState({
       closingCosts: {
-        lendersTitlePoicy: { lendersTitlePolicy },
+        lendersTitlePolicy: { lendersTitlePolicy },
         escrowFee: { escrowFee },
         origFee: { origFee },
         proratedTax: { proratedTax },
@@ -128,7 +85,7 @@ class Buyers extends Component {
     this.changeFixed(fixed);
     this.bringToClose(bringToClose);
     this.changeMIP(mip);
-    this.changeClosingCosts(lendersTitlePolicy, escrowFee, origFee, proratedTax);
+    this.changeClosingCosts(lendersTitlePolicy, escrowFee, origFee, proratedTax, prepaidInsurance, prepaidTaxes, prepaidInterest.toLocaleString(2));
   }
 
   downBack = (view, down) => {
@@ -150,11 +107,12 @@ class Buyers extends Component {
 
 
     renderView = () => {
-      const { view } = this.state;
-      if (view === 'form') {
+      const { view, loan } = this.state;
+      if (view === 'form' && loan === 'Conventional') {
         return (
           <ScrollView>
             <View style={Styles.styles.container}>
+
               <View style={{
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -167,11 +125,153 @@ class Buyers extends Component {
                 />
               </View>
 
+              <Picker
+                selectedValue={loan}
+                onValueChange={itemValue => this.setState({ loan: itemValue })}
+              >
+                <Picker.Item label="Conventional" value="Conventional" />
+                <Picker.Item label="FHA" value="FHA" />
+                <Picker.Item label="VA" value="VA" />
+                <Picker.Item label="Cash" value="Cash" />
+              </Picker>
+
               <Form
                 ref={c => this._form = c}
-                type={User}
-                options={options}
-                value={value}
+                type={Values.funcs.Conventional}
+                options={Values.funcs.Conventionaloptions}
+                value={Values.funcs.Conventionalvalue}
+              />
+              <View style={Styles.styles.button}>
+                <Button
+                  title="Calculate"
+                  onPress={this.handleSubmit}
+                  color="white"
+                />
+              </View>
+            </View>
+          </ScrollView>
+        );
+      }
+      if (view === 'form' && loan === 'FHA') {
+        return (
+          <ScrollView>
+            <View style={Styles.styles.container}>
+
+              <View style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                paddingBottom: 10,
+              }}
+              >
+                <Image
+                  style={{ width: 150, height: 150 }}
+                  source={{ uri: 'http://static1.squarespace.com/static/558afaebe4b04871ce600780/t/558afbc9e4b01d698d1a354f/1435171786494/smaller.png?format=1500w' }}
+                />
+              </View>
+
+              <Picker
+                selectedValue={loan}
+                onValueChange={itemValue => this.setState({ loan: itemValue })}
+              >
+                <Picker.Item label="Conventional" value="Conventional" />
+                <Picker.Item label="FHA" value="FHA" />
+                <Picker.Item label="VA" value="VA" />
+                <Picker.Item label="Cash" value="Cash" />
+              </Picker>
+
+              <Form
+                ref={c => this._form = c}
+                type={Values.funcs.FHA}
+                options={Values.funcs.FHAoptions}
+                value={Values.funcs.FHAvalue}
+              />
+              <View style={Styles.styles.button}>
+                <Button
+                  title="Calculate"
+                  onPress={this.handleSubmit}
+                  color="white"
+                />
+              </View>
+            </View>
+          </ScrollView>
+        );
+      }
+      if (view === 'form' && loan === 'VA') {
+        return (
+          <ScrollView>
+            <View style={Styles.styles.container}>
+
+              <View style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                paddingBottom: 10,
+              }}
+              >
+                <Image
+                  style={{ width: 150, height: 150 }}
+                  source={{ uri: 'http://static1.squarespace.com/static/558afaebe4b04871ce600780/t/558afbc9e4b01d698d1a354f/1435171786494/smaller.png?format=1500w' }}
+                />
+              </View>
+
+              <Picker
+                selectedValue={loan}
+                onValueChange={itemValue => this.setState({ loan: itemValue })}
+              >
+                <Picker.Item label="Conventional" value="Conventional" />
+                <Picker.Item label="FHA" value="FHA" />
+                <Picker.Item label="VA" value="VA" />
+                <Picker.Item label="Cash" value="Cash" />
+              </Picker>
+
+              <Form
+                ref={c => this._form = c}
+                type={Values.funcs.VA}
+                options={Values.funcs.VAoptions}
+                value={Values.funcs.VAvalue}
+              />
+              <View style={Styles.styles.button}>
+                <Button
+                  title="Calculate"
+                  onPress={this.handleSubmit}
+                  color="white"
+                />
+              </View>
+            </View>
+          </ScrollView>
+        );
+      }
+      if (view === 'form' && loan === 'Cash') {
+        return (
+          <ScrollView>
+            <View style={Styles.styles.container}>
+
+              <View style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                paddingBottom: 10,
+              }}
+              >
+                <Image
+                  style={{ width: 150, height: 150 }}
+                  source={{ uri: 'http://static1.squarespace.com/static/558afaebe4b04871ce600780/t/558afbc9e4b01d698d1a354f/1435171786494/smaller.png?format=1500w' }}
+                />
+              </View>
+
+              <Picker
+                selectedValue={loan}
+                onValueChange={itemValue => this.setState({ loan: itemValue })}
+              >
+                <Picker.Item label="Conventional" value="Conventional" />
+                <Picker.Item label="FHA" value="FHA" />
+                <Picker.Item label="VA" value="VA" />
+                <Picker.Item label="Cash" value="Cash" />
+              </Picker>
+
+              <Form
+                ref={c => this._form = c}
+                type={Values.funcs.Cash}
+                options={Values.funcs.Cashoptions}
+                value={Values.funcs.Cashvalue}
               />
               <View style={Styles.styles.button}>
                 <Button
