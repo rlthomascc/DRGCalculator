@@ -16,8 +16,14 @@ const styles = StyleSheet.create({
   },
   titleText: {
     marginTop: 20,
-    textAlign: 'center',
-    fontSize: 18,
+    // textAlign: 'center',
+    paddingLeft: 20,
+    fontSize: 16,
+  },
+  closingCosts: {
+    marginTop: 70,
+    paddingLeft: 20,
+    fontSize: 14,
   },
   mainApp: {
     flex: 1,

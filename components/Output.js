@@ -1,13 +1,14 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-useless-constructor */
 /* eslint-disable react/jsx-filename-extension */
 import React, { Component } from 'react';
 import {
   View,
-  Button,
   Text,
   Image,
 } from 'react-native';
+import { Button } from 'react-native-elements';
 import Styles from '../styling/styles';
 
 class Output extends Component {
@@ -21,10 +22,7 @@ class Output extends Component {
       viewChange, down, taxes, insurance, pAndL, prepaids, fixed, bringToClose, mip,
     } = this.props;
     return (
-      <View style={{
-        paddingTop: 130,
-      }}
-      >
+      <View style={Styles.styles.container}>
 
         <View style={{
           justifyContent: 'center',
@@ -40,21 +38,21 @@ class Output extends Component {
 
         <Text style={Styles.styles.titleText}>
 
-        Bring To Close:
+          <Text style={{ fontWeight: 'bold' }}>Bring To Close: </Text>
         $
           {bringToClose}
           {'\n'}
 
-        Down Payment:
+          <Text style={{ fontWeight: 'bold' }}>Down Payment: </Text>
                     $
           {down}
           {'\n'}
 
-          Prepaids:
+          <Text style={{ fontWeight: 'bold' }}>Prepaids: </Text>
           $
           {prepaids}
           {'\n'}
-          Fixed:
+          <Text style={{ fontWeight: 'bold' }}>Fixed: </Text>
           $
           {fixed}
 
@@ -62,31 +60,34 @@ class Output extends Component {
         </Text>
 
         <View>
-          <Button
-            title="Closing Costs >"
+          <Text
+            style={{
+              color: 'blue',
+              paddingLeft: 20,
+              fontSize: 16,
+            }}
             onPress={() => viewChange('closingCosts')}
-            color="blue"
           >
-CLOSING COST LINK
+Closing Costs >
 
-          </Button>
+          </Text>
         </View>
 
 
         <Text style={Styles.styles.titleText}>
-                    P&I:
+          <Text style={{ fontWeight: 'bold' }}>P&I: </Text>
                     $
           {pAndL}
           {'\n'}
-                    Insurance:
+          <Text style={{ fontWeight: 'bold' }}>Insurance: </Text>
                     $
           {insurance}
           {'\n'}
-                    Taxes:
+          <Text style={{ fontWeight: 'bold' }}>Taxes: </Text>
                     $
           {taxes}
           {'\n'}
-                    MIP:
+          <Text style={{ fontWeight: 'bold' }}> MIP: </Text>
           {mip}
           {'\n'}
 
@@ -97,7 +98,7 @@ CLOSING COST LINK
           <Button
             title="Reset Form"
             onPress={() => viewChange('form')}
-            color="white"
+            backgroundColor="none"
           />
         </View>
       </View>
