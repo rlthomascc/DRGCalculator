@@ -191,14 +191,14 @@ Please pick a Loan Type:
                       key={index}
                       onPress={() => this.changeLoan(value.value)}
                       style={{
-                        paddingTop: 5, paddingBottom: 5,  alignItems: 'center',
+                        paddingTop: 5, paddingBottom: 5, alignItems: 'center',
                       }}
                     >
                       <Text style={{ fontSize: 20 }}>{value.title}</Text>
                     </TouchableHighlight>
                   ))}
                   <TouchableHighlight style={{ paddingTop: 4, paddingBottom: 4, alignItems: 'center' }}>
-                    <Text onPress={() => this.togglePicker(false)} style={{ color: '#999', fontSize: 16 }}>Cancel</Text>
+                    <Text onPress={() => this.togglePicker(false)} style={{ color: '#999', fontSize: 18 }}>Close</Text>
                   </TouchableHighlight>
                 </View>
               </Modal>
@@ -279,14 +279,14 @@ Please pick a Loan Type:
                       key={index}
                       onPress={() => this.changeLoan(value.value)}
                       style={{
-                        paddingTop: 5, paddingBottom: 5,  alignItems: 'center',
+                        paddingTop: 5, paddingBottom: 5, alignItems: 'center',
                       }}
                     >
                       <Text style={{ fontSize: 20 }}>{value.title}</Text>
                     </TouchableHighlight>
                   ))}
                   <TouchableHighlight style={{ paddingTop: 4, paddingBottom: 4, alignItems: 'center' }}>
-                    <Text onPress={() => this.togglePicker(false)} style={{ color: '#999', fontSize: 16 }}>Cancel</Text>
+                    <Text onPress={() => this.togglePicker(false)} style={{ color: '#999', fontSize: 18 }}>Close</Text>
                   </TouchableHighlight>
                 </View>
               </Modal>
@@ -367,7 +367,7 @@ Please pick a Loan Type:
                       key={index}
                       onPress={() => this.changeLoan(value.value)}
                       style={{
-                        paddingTop: 5, paddingBottom: 5,  alignItems: 'center',
+                        paddingTop: 5, paddingBottom: 5, alignItems: 'center',
                       }}
                     >
                       <Text style={{ fontSize: 20 }}>{value.title}</Text>
@@ -455,7 +455,7 @@ Please pick a Loan Type:
                       key={index}
                       onPress={() => this.changeLoan(value.value)}
                       style={{
-                        paddingTop: 5, paddingBottom: 5,  alignItems: 'center',
+                        paddingTop: 5, paddingBottom: 5, alignItems: 'center',
                       }}
                     >
                       <Text style={{ fontSize: 20 }}>{value.title}</Text>

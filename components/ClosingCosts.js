@@ -76,6 +76,8 @@ class ClosingCosts extends Component {
             {closingCosts.proratedTax.proratedTax}
             {'\n'}
             RecordingFee: $192.00
+            {'\n'}
+            {'\n'}
 
           </Text>
           <View style={Styles.styles.button}>
