@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-boolean-value */
 /* eslint-disable no-shadow */
 /* eslint-disable consistent-return */
 /* eslint-disable no-return-assign */
@@ -13,8 +14,11 @@ import {
   Text,
   Image,
   Picker,
+  Modal,
+  TouchableHighlight,
 } from 'react-native';
 import t from 'tcomb-form-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import Output from './Output';
 import ClosingCosts from './ClosingCosts';
 import Styles from '../styling/styles';
@@ -24,12 +28,12 @@ import Values from '../helperFunctions/formValues';
 
 const Form = t.form.Form;
 
-const loanPicker = ['Conventional', 'FHA', 'VA', 'Cash'];
 
 class Buyers extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      pickerDisplay: false,
       loan: 'Conventional',
       view: 'form',
       down: '',
@@ -61,6 +65,10 @@ class Buyers extends Component {
   bringToClose = (e) => { this.setState({ bringToClose: e }); }
 
   changeMIP = (e) => { this.setState({ mip: e }); }
+
+  changeLoan = (e) => { this.setState({ loan: e }); }
+
+  togglePicker = (e) => { this.setState({ pickerDisplay: e }); }
 
   changeClosingCosts = (lendersTitlePolicy, escrowFee, origFee, proratedTax, prepaidInsurance, prepaidTaxes, prepaidInterest) => {
     this.setState({
@@ -107,7 +115,23 @@ class Buyers extends Component {
 
 
     renderView = () => {
-      const { view, loan } = this.state;
+      const { view, loan, pickerDisplay } = this.state;
+      const pickerValues = [{
+        title: 'Conventional',
+        value: 'Conventional',
+      },
+      {
+        title: 'FHA',
+        value: 'FHA',
+      },
+      {
+        title: 'VA',
+        value: 'VA',
+      },
+      {
+        title: 'Cash',
+        value: 'Cash',
+      }];
       if (view === 'form' && loan === 'Conventional') {
         return (
           <ScrollView>
@@ -125,15 +149,59 @@ class Buyers extends Component {
                 />
               </View>
 
-              <Picker
-                selectedValue={loan}
-                onValueChange={itemValue => this.setState({ loan: itemValue })}
-              >
-                <Picker.Item label="Conventional" value="Conventional" />
-                <Picker.Item label="FHA" value="FHA" />
-                <Picker.Item label="VA" value="VA" />
-                <Picker.Item label="Cash" value="Cash" />
-              </Picker>
+              <View style={{ paddingBottom: 30 }}>
+                <Text
+                  style={{
+                    fontSize: 16,
+                    fontWeight: 'bold',
+                  }}
+                  onPress={() => this.togglePicker(true)}
+                >
+                  <Icon name="ios-arrow-down" size={20} />
+                  {'   '}
+                  Conventional
+
+                </Text>
+              </View>
+
+
+              <Modal visible={pickerDisplay} animationType="slide" transparent={true} onRequestClose={() => console.log('Close was requested')}>
+                <View style={{
+                  margin: 20,
+                  padding: 20,
+                  backgroundColor: '#efefef',
+                  bottom: 20,
+                  left: 20,
+                  right: 20,
+                  position: 'absolute',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+                >
+                  <Text style={{
+                    fontWeight: 'bold', alignItems: 'center', marginBottom: 15, fontSize: 16,
+                  }}
+                  >
+Please pick a Loan Type:
+                    {' '}
+
+                  </Text>
+                  {pickerValues.map((value, index) => (
+                    <TouchableHighlight
+                      key={index}
+                      onPress={() => this.changeLoan(value.value)}
+                      style={{
+                        paddingTop: 5, paddingBottom: 5, fontSize: 16, alignItems: 'center',
+                      }}
+                    >
+                      <Text style={{ fontSize: 20 }}>{value.title}</Text>
+                    </TouchableHighlight>
+                  ))}
+                  <TouchableHighlight style={{ paddingTop: 4, paddingBottom: 4, alignItems: 'center' }}>
+                    <Text onPress={() => this.togglePicker(false)} style={{ color: '#999', fontSize: 16 }}>Cancel</Text>
+                  </TouchableHighlight>
+                </View>
+              </Modal>
 
               <Form
                 ref={c => this._form = c}
@@ -169,15 +237,59 @@ class Buyers extends Component {
                 />
               </View>
 
-              <Picker
-                selectedValue={loan}
-                onValueChange={itemValue => this.setState({ loan: itemValue })}
-              >
-                <Picker.Item label="Conventional" value="Conventional" />
-                <Picker.Item label="FHA" value="FHA" />
-                <Picker.Item label="VA" value="VA" />
-                <Picker.Item label="Cash" value="Cash" />
-              </Picker>
+              <View style={{ paddingBottom: 30 }}>
+                <Text
+                  style={{
+                    fontSize: 16,
+                    fontWeight: 'bold',
+                  }}
+                  onPress={() => this.togglePicker(true)}
+                >
+                  <Icon name="ios-arrow-down" size={20} />
+                  {'   '}
+                  FHA
+
+                </Text>
+              </View>
+
+
+              <Modal visible={pickerDisplay} animationType="slide" transparent={true} onRequestClose={() => console.log('Close was requested')}>
+                <View style={{
+                  margin: 20,
+                  padding: 20,
+                  backgroundColor: '#efefef',
+                  bottom: 20,
+                  left: 20,
+                  right: 20,
+                  position: 'absolute',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+                >
+                  <Text style={{
+                    fontWeight: 'bold', alignItems: 'center', marginBottom: 15, fontSize: 16,
+                  }}
+                  >
+Please pick a Loan Type:
+                    {' '}
+
+                  </Text>
+                  {pickerValues.map((value, index) => (
+                    <TouchableHighlight
+                      key={index}
+                      onPress={() => this.changeLoan(value.value)}
+                      style={{
+                        paddingTop: 5, paddingBottom: 5, fontSize: 16, alignItems: 'center',
+                      }}
+                    >
+                      <Text style={{ fontSize: 20 }}>{value.title}</Text>
+                    </TouchableHighlight>
+                  ))}
+                  <TouchableHighlight style={{ paddingTop: 4, paddingBottom: 4, alignItems: 'center' }}>
+                    <Text onPress={() => this.togglePicker(false)} style={{ color: '#999', fontSize: 16 }}>Cancel</Text>
+                  </TouchableHighlight>
+                </View>
+              </Modal>
 
               <Form
                 ref={c => this._form = c}
@@ -213,15 +325,59 @@ class Buyers extends Component {
                 />
               </View>
 
-              <Picker
-                selectedValue={loan}
-                onValueChange={itemValue => this.setState({ loan: itemValue })}
-              >
-                <Picker.Item label="Conventional" value="Conventional" />
-                <Picker.Item label="FHA" value="FHA" />
-                <Picker.Item label="VA" value="VA" />
-                <Picker.Item label="Cash" value="Cash" />
-              </Picker>
+              <View style={{ paddingBottom: 30 }}>
+                <Text
+                  style={{
+                    fontSize: 16,
+                    fontWeight: 'bold',
+                  }}
+                  onPress={() => this.togglePicker(true)}
+                >
+                  <Icon name="ios-arrow-down" size={20} />
+                  {'   '}
+                  VA
+
+                </Text>
+              </View>
+
+
+              <Modal visible={pickerDisplay} animationType="slide" transparent={true} onRequestClose={() => console.log('Close was requested')}>
+                <View style={{
+                  margin: 20,
+                  padding: 20,
+                  backgroundColor: '#efefef',
+                  bottom: 20,
+                  left: 20,
+                  right: 20,
+                  position: 'absolute',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+                >
+                  <Text style={{
+                    fontWeight: 'bold', alignItems: 'center', marginBottom: 15, fontSize: 16,
+                  }}
+                  >
+Please pick a Loan Type:
+                    {' '}
+
+                  </Text>
+                  {pickerValues.map((value, index) => (
+                    <TouchableHighlight
+                      key={index}
+                      onPress={() => this.changeLoan(value.value)}
+                      style={{
+                        paddingTop: 5, paddingBottom: 5, fontSize: 16, alignItems: 'center',
+                      }}
+                    >
+                      <Text style={{ fontSize: 20 }}>{value.title}</Text>
+                    </TouchableHighlight>
+                  ))}
+                  <TouchableHighlight style={{ paddingTop: 4, paddingBottom: 4, alignItems: 'center' }}>
+                    <Text onPress={() => this.togglePicker(false)} style={{ color: '#999', fontSize: 16 }}>Cancel</Text>
+                  </TouchableHighlight>
+                </View>
+              </Modal>
 
               <Form
                 ref={c => this._form = c}
@@ -257,15 +413,59 @@ class Buyers extends Component {
                 />
               </View>
 
-              <Picker
-                selectedValue={loan}
-                onValueChange={itemValue => this.setState({ loan: itemValue })}
-              >
-                <Picker.Item label="Conventional" value="Conventional" />
-                <Picker.Item label="FHA" value="FHA" />
-                <Picker.Item label="VA" value="VA" />
-                <Picker.Item label="Cash" value="Cash" />
-              </Picker>
+              <View style={{ paddingBottom: 30 }}>
+                <Text
+                  style={{
+                    fontSize: 16,
+                    fontWeight: 'bold',
+                  }}
+                  onPress={() => this.togglePicker(true)}
+                >
+                  <Icon name="ios-arrow-down" size={20} />
+                  {'   '}
+                  Cash
+
+                </Text>
+              </View>
+
+
+              <Modal visible={pickerDisplay} animationType="slide" transparent={true} onRequestClose={() => console.log('Close was requested')}>
+                <View style={{
+                  margin: 20,
+                  padding: 20,
+                  backgroundColor: '#efefef',
+                  bottom: 20,
+                  left: 20,
+                  right: 20,
+                  position: 'absolute',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+                >
+                  <Text style={{
+                    fontWeight: 'bold', alignItems: 'center', marginBottom: 15, fontSize: 16,
+                  }}
+                  >
+Please pick a Loan Type:
+                    {' '}
+
+                  </Text>
+                  {pickerValues.map((value, index) => (
+                    <TouchableHighlight
+                      key={index}
+                      onPress={() => this.changeLoan(value.value)}
+                      style={{
+                        paddingTop: 5, paddingBottom: 5, fontSize: 16, alignItems: 'center',
+                      }}
+                    >
+                      <Text style={{ fontSize: 20 }}>{value.title}</Text>
+                    </TouchableHighlight>
+                  ))}
+                  <TouchableHighlight style={{ paddingTop: 4, paddingBottom: 4, alignItems: 'center' }}>
+                    <Text onPress={() => this.togglePicker(false)} style={{ color: '#999', fontSize: 16 }}>Cancel</Text>
+                  </TouchableHighlight>
+                </View>
+              </Modal>
 
               <Form
                 ref={c => this._form = c}
