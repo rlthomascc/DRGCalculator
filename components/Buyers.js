@@ -152,7 +152,7 @@ class Buyers extends Component {
               <View style={{ paddingBottom: 30 }}>
                 <Text
                   style={{
-                    fontSize: 16,
+
                     fontWeight: 'bold',
                   }}
                   onPress={() => this.togglePicker(true)}
@@ -179,7 +179,7 @@ class Buyers extends Component {
                 }}
                 >
                   <Text style={{
-                    fontWeight: 'bold', alignItems: 'center', marginBottom: 15, fontSize: 16,
+                    fontWeight: 'bold', alignItems: 'center', marginBottom: 15,
                   }}
                   >
 Please pick a Loan Type:
@@ -191,7 +191,7 @@ Please pick a Loan Type:
                       key={index}
                       onPress={() => this.changeLoan(value.value)}
                       style={{
-                        paddingTop: 5, paddingBottom: 5, fontSize: 16, alignItems: 'center',
+                        paddingTop: 5, paddingBottom: 5,  alignItems: 'center',
                       }}
                     >
                       <Text style={{ fontSize: 20 }}>{value.title}</Text>
@@ -240,7 +240,7 @@ Please pick a Loan Type:
               <View style={{ paddingBottom: 30 }}>
                 <Text
                   style={{
-                    fontSize: 16,
+
                     fontWeight: 'bold',
                   }}
                   onPress={() => this.togglePicker(true)}
@@ -267,7 +267,7 @@ Please pick a Loan Type:
                 }}
                 >
                   <Text style={{
-                    fontWeight: 'bold', alignItems: 'center', marginBottom: 15, fontSize: 16,
+                    fontWeight: 'bold', alignItems: 'center', marginBottom: 15,
                   }}
                   >
 Please pick a Loan Type:
@@ -279,7 +279,7 @@ Please pick a Loan Type:
                       key={index}
                       onPress={() => this.changeLoan(value.value)}
                       style={{
-                        paddingTop: 5, paddingBottom: 5, fontSize: 16, alignItems: 'center',
+                        paddingTop: 5, paddingBottom: 5,  alignItems: 'center',
                       }}
                     >
                       <Text style={{ fontSize: 20 }}>{value.title}</Text>
@@ -328,7 +328,7 @@ Please pick a Loan Type:
               <View style={{ paddingBottom: 30 }}>
                 <Text
                   style={{
-                    fontSize: 16,
+
                     fontWeight: 'bold',
                   }}
                   onPress={() => this.togglePicker(true)}
@@ -355,7 +355,7 @@ Please pick a Loan Type:
                 }}
                 >
                   <Text style={{
-                    fontWeight: 'bold', alignItems: 'center', marginBottom: 15, fontSize: 16,
+                    fontWeight: 'bold', alignItems: 'center', marginBottom: 15,
                   }}
                   >
 Please pick a Loan Type:
@@ -367,7 +367,7 @@ Please pick a Loan Type:
                       key={index}
                       onPress={() => this.changeLoan(value.value)}
                       style={{
-                        paddingTop: 5, paddingBottom: 5, fontSize: 16, alignItems: 'center',
+                        paddingTop: 5, paddingBottom: 5,  alignItems: 'center',
                       }}
                     >
                       <Text style={{ fontSize: 20 }}>{value.title}</Text>
@@ -416,7 +416,7 @@ Please pick a Loan Type:
               <View style={{ paddingBottom: 30 }}>
                 <Text
                   style={{
-                    fontSize: 16,
+
                     fontWeight: 'bold',
                   }}
                   onPress={() => this.togglePicker(true)}
@@ -443,7 +443,7 @@ Please pick a Loan Type:
                 }}
                 >
                   <Text style={{
-                    fontWeight: 'bold', alignItems: 'center', marginBottom: 15, fontSize: 16,
+                    fontWeight: 'bold', alignItems: 'center', marginBottom: 15,
                   }}
                   >
 Please pick a Loan Type:
@@ -455,7 +455,7 @@ Please pick a Loan Type:
                       key={index}
                       onPress={() => this.changeLoan(value.value)}
                       style={{
-                        paddingTop: 5, paddingBottom: 5, fontSize: 16, alignItems: 'center',
+                        paddingTop: 5, paddingBottom: 5,  alignItems: 'center',
                       }}
                     >
                       <Text style={{ fontSize: 20 }}>{value.title}</Text>
