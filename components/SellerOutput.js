@@ -17,7 +17,7 @@ class SellerOutput extends Component {
     const { changeView } = this.props;
     return (
       <ScrollView>
-        <View style={{ paddingTop: 200, justifyContent: 'center' }}>
+        <View style={Style.styles.container}>
 
           <View>
             <Text style={Style.styles.titleText}>Seller Output</Text>
