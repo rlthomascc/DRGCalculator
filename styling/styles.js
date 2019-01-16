@@ -8,6 +8,17 @@ const styles = StyleSheet.create({
     marginBottom: 50,
     padding: 30,
   },
+  pieChart: {
+    justifyContent: 'center',
+    backgroundColor: 'white',
+    marginTop: 20,
+    padding: 30,
+    alignItems: 'center',
+  },
+  pieChartText: {
+    fontSize: 16,
+    textAlign: 'center',
+  },
   button: {
     justifyContent: 'center',
     backgroundColor: '#0f87fe',
@@ -47,6 +58,13 @@ const styles = StyleSheet.create({
   row: {
     flex: 1,
     alignSelf: 'stretch',
+  },
+  output: {
+    justifyContent: 'center',
+    backgroundColor: 'white',
+    marginTop: 10,
+    marginBottom: 50,
+    padding: 30,
   },
 });
 

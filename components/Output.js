@@ -24,19 +24,18 @@ class Output extends Component {
     const {
       viewChange, down, taxes, insurance, pAndL, prepaids, fixed, bringToClose, mip,
     } = this.props;
-    const chart_wh = 250;
-    console.log(down, prepaids, fixed);
+    const chart_wh = 185;
     // FIGURE OUT HOW TO REMOVE COMMAS FROM ALL NUMBERS AND THE PIE CHART WILL WORK SUFFICENTLY
-    const series = [30000, prepaids, fixed];
+    const series1 = [down, prepaids, fixed];
+    const series2 = [pAndL, insurance, taxes, mip];
     const sliceColor = ['#F44336', '#2196F3', '#FFEB3B', '#4CAF50', '#FF9800'];
     return (
       <ScrollView>
-        <View style={Styles.styles.container}>
+        <View style={Styles.styles.output}>
 
           <View style={{
             justifyContent: 'center',
             alignItems: 'center',
-            paddingBottom: 10,
           }}
           >
             <Image
@@ -46,57 +45,90 @@ class Output extends Component {
           </View>
 
 
-          <View style={Styles.styles.container}>
+          <View style={Styles.styles.pieChart}>
+
+            <Text style={Styles.styles.pieChartText}>
+
+              <Text style={{ fontWeight: 'bold', color: '#cda135', textAlign: 'center' }}>Bring To Close: </Text>
+        $
+              {bringToClose.toLocaleString(2)}
+              {'\n'}
+            </Text>
             <StatusBar
               hidden
             />
-            <Text style={Styles.styles.title}>Basic</Text>
             <PieChart
               chart_wh={chart_wh}
-              series={series}
-              sliceColor={sliceColor}
-            />
-            <Text style={Styles.styles.title}>Doughnut</Text>
-            <PieChart
-              chart_wh={chart_wh}
-              series={series}
+              series={series1}
               sliceColor={sliceColor}
               doughnut
-              coverRadius={0.45}
+              coverRadius={0.75}
+              coverFill="#FFF"
+            />
+          </View>
+
+          <Text style={Styles.styles.pieChartText}>
+
+            <Text style={{ fontWeight: 'bold', color: '#F44336' }}>Down Payment: </Text>
+                    $
+            {down.toLocaleString(2)}
+            {'\n'}
+
+            <Text style={{ fontWeight: 'bold', color: '#2196f3' }}>Prepaids: </Text>
+          $
+            {prepaids.toLocaleString(2)}
+            {'\n'}
+            <Text style={{ fontWeight: 'bold', color: '#ffeb3b' }}>Fixed: </Text>
+          $
+            {fixed.toLocaleString(2)}
+
+
+          </Text>
+
+
+          <View style={Styles.styles.pieChart}>
+
+            <StatusBar
+              hidden
+            />
+            <PieChart
+              chart_wh={chart_wh}
+              series={series2}
+              sliceColor={sliceColor}
+              doughnut
+              coverRadius={0.75}
               coverFill="#FFF"
             />
           </View>
 
 
-          <Text style={Styles.styles.titleText}>
-
-            <Text style={{ fontWeight: 'bold' }}>Bring To Close: </Text>
-        $
-            {bringToClose}
-            {'\n'}
-
-            <Text style={{ fontWeight: 'bold' }}>Down Payment: </Text>
+          <Text style={Styles.styles.pieChartText}>
+            <Text style={{ fontWeight: 'bold', color: '#F44336' }}>P&I: </Text>
                     $
-            {down}
+            {pAndL.toLocaleString(2)}
             {'\n'}
-
-            <Text style={{ fontWeight: 'bold' }}>Prepaids: </Text>
-          $
-            {prepaids}
+            <Text style={{ fontWeight: 'bold', color: '#2196F3' }}>Insurance: </Text>
+                    $
+            {insurance.toLocaleString(2)}
             {'\n'}
-            <Text style={{ fontWeight: 'bold' }}>Fixed: </Text>
-          $
-            {fixed}
-
+            <Text style={{ fontWeight: 'bold', color: '#FFEB3B' }}>Taxes: </Text>
+                    $
+            {taxes.toLocaleString(2)}
+            {'\n'}
+            <Text style={{ fontWeight: 'bold', color: '#4CAF50' }}>MIP: </Text>
+            {mip.toLocaleString(2)}
+            {'\n'}
 
           </Text>
+
 
           <View>
             <Text
               style={{
                 color: 'blue',
-                paddingLeft: 20,
+                textAlign: 'center',
                 fontSize: 16,
+                marginBottom: 50,
               }}
               onPress={() => viewChange('closingCosts')}
             >
@@ -104,26 +136,6 @@ Closing Costs >
 
             </Text>
           </View>
-
-
-          <Text style={Styles.styles.titleText}>
-            <Text style={{ fontWeight: 'bold' }}>P&I: </Text>
-                    $
-            {pAndL}
-            {'\n'}
-            <Text style={{ fontWeight: 'bold' }}>Insurance: </Text>
-                    $
-            {insurance}
-            {'\n'}
-            <Text style={{ fontWeight: 'bold' }}>Taxes: </Text>
-                    $
-            {taxes}
-            {'\n'}
-            <Text style={{ fontWeight: 'bold' }}> MIP: </Text>
-            {mip}
-            {'\n'}
-
-          </Text>
 
 
           <View style={Styles.styles.button}>

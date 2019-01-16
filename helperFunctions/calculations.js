@@ -6,8 +6,8 @@ calculateDownPayment = (home, down, callback) => {
   const decimal = down.slice(0, -1);
   const percent = decimal / 100;
   const downPayment = Math.round(home * percent);
-  const final = downPayment.toLocaleString();
-  callback('output', final);
+  // const final = downPayment.toLocaleString();
+  callback('output', downPayment);
 };
 
 // WHERE ALL THE MATH IS DONE
