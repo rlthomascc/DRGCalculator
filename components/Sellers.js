@@ -11,6 +11,7 @@ import t from 'tcomb-form-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Styles from '../styling/styles';
 import SellerOutput from './SellerOutput';
+import SellerCalcs from '../helperFunctions/SellerCalcs';
 
 
 const Form = t.form.Form;
@@ -23,27 +24,27 @@ const options = {
     brokerFee: {
       label: 'Broker Fee',
     },
-    misc: {
-      label: 'Misc',
-    },
-    loanBal: {
-      label: 'Loan Bal',
-    },
-    closingDate: {
-      label: 'Closing Date',
-    },
+    // misc: {
+    //   label: 'Misc',
+    // },
+    // loanBal: {
+    //   label: 'Loan Bal',
+    // },
+    // closingDate: {
+    //   label: 'Closing Date',
+    // },
   },
 };
 
 const User = t.struct({
   salesPrice: t.Number,
   brokerFee: t.String,
-  repairs: t.maybe(t.Number),
-  misc: t.maybe(t.Number),
+  // repairs: t.maybe(t.Number),
+  // misc: t.maybe(t.Number),
   propTaxes: t.String,
-  loanBal: t.maybe(t.Number),
+  // loanBal: t.maybe(t.Number),
   interestRate: t.String,
-  closingDate: t.maybe(t.Date),
+  // closingDate: t.maybe(t.Date),
 //   misc: t.maybe(t.Number),
 });
 
@@ -60,6 +61,15 @@ class Sellers extends Component {
       view: 'form',
       pickerDisplay: false,
       loan: 'Conventional',
+      salesPrice: '',
+      balance: '',
+      netAtClose: '',
+      ownersTitlePolicy: '',
+      escrowFee: '',
+      countyTransferTax: '',
+      buyersBrokersFee: '',
+      listingBrokersFee: '',
+      closingCosts: '',
     };
   }
 
@@ -69,15 +79,41 @@ class Sellers extends Component {
 
   changeLoan = (e) => { this.setState({ loan: e }); }
 
+  changeSalesPrice = (e) => { this.setState({ salesPrice: e }); }
+
+  changeBalance = (e) => { this.setState({ balance: e }); }
+
+  changeNetAtClose = (e) => { this.setState({ netAtClose: e }); }
+
+  changeOwnersTitlePolicy = (e) => { this.setState({ ownersTitlePolicy: e }); }
+
+  changeEscrowFee = (e) => { this.setState({ escrowFee: e }); }
+
+  changeCountyTransferTax = (e) => { this.setState({ countyTransferTax: e }); }
+
+  changeBuyersBrokersFee = (e) => { this.setState({ buyersBrokersFee: e }); }
+
+  changeListingBrokersFee = (e) => { this.setState({ listingBrokersFee: e }); }
+
+  changeClosingCosts = (e) => { this.setState({ closingCosts: e }); }
+
+
   handleSubmit = () => {
     const value = this._form.getValue(); // use that ref to get the form value
-    this.calculateMethods(value);
-    this.changeView('output');
-    console.log(value, 'hello!');
+    SellerCalcs.funcs.calculateAll(value.salesPrice, value.brokerFee, value.propTaxes, value.interestRate, this.bringItBack);
   }
 
-  calculateMethods = (value) => {
-    console.log(value);
+  bringItBack = (broker, salesPrice, balance, escrowFee, ownersTitlePolicy, countyTransferTax, netAtClose, closingCosts) => {
+    this.changeView('output');
+    this.changeSalesPrice(salesPrice);
+    this.changeBalance(balance);
+    this.changeNetAtClose(netAtClose);
+    this.changeOwnersTitlePolicy(ownersTitlePolicy);
+    this.changeEscrowFee(escrowFee);
+    this.changeCountyTransferTax(countyTransferTax);
+    this.changeBuyersBrokersFee(broker);
+    this.changeListingBrokersFee(broker);
+    this.changeClosingCosts(closingCosts);
   }
 
 
@@ -99,271 +135,7 @@ class Sellers extends Component {
         title: 'Cash',
         value: 'Cash',
       }];
-      if (view === 'form' && loan === 'Conventional') {
-        return (
-          <ScrollView>
-            <View style={Styles.styles.container}>
-
-              <View style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-                paddingBottom: 10,
-              }}
-              >
-                <Image
-                  style={{ width: 150, height: 150 }}
-                  source={{ uri: 'http://static1.squarespace.com/static/558afaebe4b04871ce600780/t/558afbc9e4b01d698d1a354f/1435171786494/smaller.png?format=1500w' }}
-                />
-              </View>
-
-              <View style={{ paddingBottom: 30 }}>
-                <Text
-                  style={{
-
-                    fontWeight: 'bold',
-                  }}
-                  onPress={() => this.togglePicker(true)}
-                >
-                  <Icon name="ios-arrow-down" size={20} />
-                  {'   '}
-                  Conventional
-
-                </Text>
-              </View>
-
-
-              <Modal visible={pickerDisplay} animationType="slide" transparent onRequestClose={() => console.log('Close was requested')}>
-                <View style={{
-                  margin: 20,
-                  padding: 20,
-                  backgroundColor: '#efefef',
-                  bottom: 20,
-                  left: 20,
-                  right: 20,
-                  position: 'absolute',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-                >
-                  <Text style={{
-                    fontWeight: 'bold', alignItems: 'center', marginBottom: 15,
-                  }}
-                  >
-Please pick a Loan Type:
-                    {' '}
-
-                  </Text>
-                  {pickerValues.map((value, index) => (
-                    <TouchableHighlight
-                      key={index}
-                      onPress={() => this.changeLoan(value.value)}
-                      style={{
-                        paddingTop: 5, paddingBottom: 5, alignItems: 'center',
-                      }}
-                    >
-                      <Text style={{ fontSize: 20 }}>{value.title}</Text>
-                    </TouchableHighlight>
-                  ))}
-                  <TouchableHighlight style={{ paddingTop: 4, paddingBottom: 4, alignItems: 'center' }}>
-                    <Text onPress={() => this.togglePicker(false)} style={{ color: '#999', fontSize: 18 }}>Close</Text>
-                  </TouchableHighlight>
-                </View>
-              </Modal>
-
-              <Form
-                ref={c => this._form = c}
-                type={User}
-                options={options}
-                value={value}
-              />
-              <View style={Styles.styles.button}>
-                <Button
-                  title="Calculate"
-                  onPress={this.handleSubmit}
-                  color="white"
-                />
-              </View>
-            </View>
-          </ScrollView>
-        );
-      }
-      if (view === 'form' && loan === 'FHA') {
-        return (
-          <ScrollView>
-            <View style={Styles.styles.container}>
-
-              <View style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-                paddingBottom: 10,
-              }}
-              >
-                <Image
-                  style={{ width: 150, height: 150 }}
-                  source={{ uri: 'http://static1.squarespace.com/static/558afaebe4b04871ce600780/t/558afbc9e4b01d698d1a354f/1435171786494/smaller.png?format=1500w' }}
-                />
-              </View>
-
-              <View style={{ paddingBottom: 30 }}>
-                <Text
-                  style={{
-
-                    fontWeight: 'bold',
-                  }}
-                  onPress={() => this.togglePicker(true)}
-                >
-                  <Icon name="ios-arrow-down" size={20} />
-                  {'   '}
-                  Conventional
-
-                </Text>
-              </View>
-
-
-              <Modal visible={pickerDisplay} animationType="slide" transparent onRequestClose={() => console.log('Close was requested')}>
-                <View style={{
-                  margin: 20,
-                  padding: 20,
-                  backgroundColor: '#efefef',
-                  bottom: 20,
-                  left: 20,
-                  right: 20,
-                  position: 'absolute',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-                >
-                  <Text style={{
-                    fontWeight: 'bold', alignItems: 'center', marginBottom: 15,
-                  }}
-                  >
-Please pick a Loan Type:
-                    {' '}
-
-                  </Text>
-                  {pickerValues.map((value, index) => (
-                    <TouchableHighlight
-                      key={index}
-                      onPress={() => this.changeLoan(value.value)}
-                      style={{
-                        paddingTop: 5, paddingBottom: 5, alignItems: 'center',
-                      }}
-                    >
-                      <Text style={{ fontSize: 20 }}>{value.title}</Text>
-                    </TouchableHighlight>
-                  ))}
-                  <TouchableHighlight style={{ paddingTop: 4, paddingBottom: 4, alignItems: 'center' }}>
-                    <Text onPress={() => this.togglePicker(false)} style={{ color: '#999', fontSize: 18 }}>Close</Text>
-                  </TouchableHighlight>
-                </View>
-              </Modal>
-
-              <Form
-                ref={c => this._form = c}
-                type={User}
-                options={options}
-                value={value}
-              />
-              <View style={Styles.styles.button}>
-                <Button
-                  title="Calculate"
-                  onPress={this.handleSubmit}
-                  color="white"
-                />
-              </View>
-            </View>
-          </ScrollView>
-        );
-      }
-      if (view === 'form' && loan === 'VA') {
-        return (
-          <ScrollView>
-            <View style={Styles.styles.container}>
-
-              <View style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-                paddingBottom: 10,
-              }}
-              >
-                <Image
-                  style={{ width: 150, height: 150 }}
-                  source={{ uri: 'http://static1.squarespace.com/static/558afaebe4b04871ce600780/t/558afbc9e4b01d698d1a354f/1435171786494/smaller.png?format=1500w' }}
-                />
-              </View>
-
-              <View style={{ paddingBottom: 30 }}>
-                <Text
-                  style={{
-
-                    fontWeight: 'bold',
-                  }}
-                  onPress={() => this.togglePicker(true)}
-                >
-                  <Icon name="ios-arrow-down" size={20} />
-                  {'   '}
-                  Conventional
-
-                </Text>
-              </View>
-
-
-              <Modal visible={pickerDisplay} animationType="slide" transparent onRequestClose={() => console.log('Close was requested')}>
-                <View style={{
-                  margin: 20,
-                  padding: 20,
-                  backgroundColor: '#efefef',
-                  bottom: 20,
-                  left: 20,
-                  right: 20,
-                  position: 'absolute',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-                >
-                  <Text style={{
-                    fontWeight: 'bold', alignItems: 'center', marginBottom: 15,
-                  }}
-                  >
-Please pick a Loan Type:
-                    {' '}
-
-                  </Text>
-                  {pickerValues.map((value, index) => (
-                    <TouchableHighlight
-                      key={index}
-                      onPress={() => this.changeLoan(value.value)}
-                      style={{
-                        paddingTop: 5, paddingBottom: 5, alignItems: 'center',
-                      }}
-                    >
-                      <Text style={{ fontSize: 20 }}>{value.title}</Text>
-                    </TouchableHighlight>
-                  ))}
-                  <TouchableHighlight style={{ paddingTop: 4, paddingBottom: 4, alignItems: 'center' }}>
-                    <Text onPress={() => this.togglePicker(false)} style={{ color: '#999', fontSize: 18 }}>Close</Text>
-                  </TouchableHighlight>
-                </View>
-              </Modal>
-
-              <Form
-                ref={c => this._form = c}
-                type={User}
-                options={options}
-                value={value}
-              />
-              <View style={Styles.styles.button}>
-                <Button
-                  title="Calculate"
-                  onPress={this.handleSubmit}
-                  color="white"
-                />
-              </View>
-            </View>
-          </ScrollView>
-        );
-      }
-      if (view === 'form' && loan === 'Cash') {
+      if (view === 'form') {
         return (
           <ScrollView>
             <View style={Styles.styles.container}>
@@ -452,9 +224,23 @@ Please pick a Loan Type:
         );
       }
       if (view === 'output') {
+        const {
+          view, loan, salesPrice, balance, netAtClose, ownersTitlePolicy, escrowFee, countyTransferTax, buyersBrokersFee, listingBrokersFee, closingCosts,
+        } = this.state;
         return (
           <SellerOutput
             changeView={this.changeView}
+            view={view}
+            loan={loan}
+            salesPrice={salesPrice}
+            balance={balance}
+            netAtClose={netAtClose}
+            ownersTitlePolicy={ownersTitlePolicy}
+            escrowFee={escrowFee}
+            countyTransferTax={countyTransferTax}
+            buyersBrokersFee={buyersBrokersFee}
+            listingBrokersFee={listingBrokersFee}
+            closingCosts={closingCosts}
           />
         );
       }

@@ -4,34 +4,116 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import {
-  View, Text, ScrollView, Button,
+  View,
+  Text,
+  Image,
+  StatusBar,
+  ScrollView,
 } from 'react-native';
-import Style from '../styling/styles';
+import { Button } from 'react-native-elements';
+import PieChart from 'react-native-pie-chart';
+import Styles from '../styling/styles';
 
 class SellerOutput extends Component {
   constructor(props) {
     super(props);
   }
 
-  renderView() {
-    const { changeView } = this.props;
+  output() {
+    const {
+      changeView, view,
+      loan,
+      salesPrice,
+      balance,
+      netAtClose,
+      ownersTitlePolicy,
+      escrowFee,
+      countyTransferTax,
+      buyersBrokersFee,
+      listingBrokersFee,
+      closingCosts,
+    } = this.props;
+
+    const chart_wh = 185;
+    // FIGURE OUT HOW TO REMOVE COMMAS FROM ALL NUMBERS AND THE PIE CHART WILL WORK SUFFICENTLY
+    const series1 = [salesPrice, balance, closingCosts, netAtClose];
+    const sliceColor = ['#FF9800', '#2196F3', 'blue', '#FFEB3B'];
     return (
       <ScrollView>
-        <View style={Style.styles.container}>
+        <View style={Styles.styles.output}>
 
-          <View>
-            <Text style={Style.styles.titleText}>Seller Output</Text>
-          </View>
-
-          <View style={Style.styles.button}>
-            <Button
-              title="Reset Form"
-              onPress={() => changeView('form')}
-              color="white"
+          <View style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+          >
+            <Image
+              style={{ width: 150, height: 150 }}
+              source={{ uri: 'http://static1.squarespace.com/static/558afaebe4b04871ce600780/t/558afbc9e4b01d698d1a354f/1435171786494/smaller.png?format=1500w' }}
             />
           </View>
 
 
+          <View style={Styles.styles.pieChart}>
+
+            <StatusBar
+              hidden
+            />
+            <PieChart
+              chart_wh={chart_wh}
+              series={series1}
+              sliceColor={sliceColor}
+              doughnut
+              coverRadius={0.75}
+              coverFill="#FFF"
+            />
+          </View>
+
+          <Text style={Styles.styles.pieChartText}>
+
+
+            <Text style={{ fontWeight: 'bold', color: '#FF9800', textAlign: 'center' }}>Sales Price: </Text>
+        $
+            {salesPrice.toLocaleString(2)}
+            {'\n'}
+
+            <Text style={{ fontWeight: 'bold', color: '#2196F3' }}>Balance: </Text>
+                    $
+            {balance.toLocaleString(2)}
+            {'\n'}
+
+            <Text
+              style={{
+                color: 'blue',
+                textAlign: 'center',
+                fontSize: 16,
+                marginBottom: 50,
+              }}
+              onPress={() => changeView('closingCosts')}
+            >
+Closing Costs >
+              {' '}
+            </Text>
+            $
+            {closingCosts.toLocaleString(2)}
+            {'\n'}
+            {'\n'}
+
+            <Text style={{ fontWeight: 'bold', color: '#FFEB3B' }}>Net At Close: </Text>
+          $
+            {netAtClose.toLocaleString(2)}
+
+
+          </Text>
+
+
+          <View style={Styles.styles.button}>
+            <Button
+              title="Reset Form"
+              onPress={() => changeView('form')}
+              backgroundColor="none"
+            />
+          </View>
         </View>
       </ScrollView>
     );
@@ -40,7 +122,7 @@ class SellerOutput extends Component {
 
   render() {
     return (
-      this.renderView()
+      this.output()
     );
   }
 }
