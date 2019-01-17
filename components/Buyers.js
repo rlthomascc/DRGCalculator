@@ -22,7 +22,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Output from './Output';
 import ClosingCosts from './ClosingCosts';
 import Styles from '../styling/styles';
-import Calcs from '../helperFunctions/calculations';
+import FHACalcs from '../helperFunctions/FHAcalculations';
+import ConventionalCalcs from '../helperFunctions/Conventionalcalculations';
 import Values from '../helperFunctions/formValues';
 
 
@@ -44,6 +45,7 @@ class Buyers extends Component {
       fixed: '',
       bringToClose: '',
       mip: '',
+      pmi: '',
       closingCosts: {},
     };
   }
@@ -70,6 +72,8 @@ class Buyers extends Component {
 
   togglePicker = (e) => { this.setState({ pickerDisplay: e }); }
 
+  changePMI = (e) => { this.setState({ pmi: e }); }
+
   changeClosingCosts = (lendersTitlePolicy, escrowFee, origFee, proratedTax, prepaidInsurance, prepaidTaxes, prepaidInterest) => {
     this.setState({
       closingCosts: {
@@ -85,7 +89,7 @@ class Buyers extends Component {
   }
 
 
-  dataBack = (tax, mip, insurance, pAndI, prepaids, fixed, bringToClose, lendersTitlePolicy, escrowFee, origFee, proratedTax, prepaidInsurance, prepaidTaxes, prepaidInterest) => {
+  dataBack = (tax, mip, insurance, pAndI, prepaids, fixed, bringToClose, lendersTitlePolicy, escrowFee, origFee, proratedTax, prepaidInsurance, prepaidTaxes, prepaidInterest, pmi) => {
     this.changeTaxes(tax);
     this.changeInsurance(insurance);
     this.changePAndI(pAndI);
@@ -93,6 +97,7 @@ class Buyers extends Component {
     this.changeFixed(fixed);
     this.bringToClose(bringToClose);
     this.changeMIP(mip);
+    this.changePMI(pmi);
     this.changeClosingCosts(lendersTitlePolicy, escrowFee, origFee, proratedTax, prepaidInsurance, prepaidTaxes, prepaidInterest.toLocaleString(2));
   }
 
@@ -103,9 +108,9 @@ class Buyers extends Component {
 
     handleSubmit = () => {
       const value = this._form.getValue(); // use that ref to get the form value
-      Calcs.funcs.calculateDownPayment(value.homePrice,
+      FHACalcs.funcs.calculateDownPayment(value.homePrice,
         value.downPayment, this.downBack);
-      Calcs.funcs.calculateAll(value.homePrice,
+      FHACalcs.funcs.calculateAll(value.homePrice,
         value.downPayment,
         value.taxes,
         value.hazardInsurance,
@@ -486,7 +491,7 @@ Please pick a Loan Type:
       }
       if (view === 'output') {
         const {
-          down, taxes, insurance, pAndL, prepaids, fixed, bringToClose, mip,
+          down, taxes, insurance, pAndL, prepaids, fixed, bringToClose, mip, pmi, loan,
         } = this.state;
         return (
           <Output
@@ -499,6 +504,8 @@ Please pick a Loan Type:
             fixed={fixed}
             bringToClose={bringToClose}
             mip={mip}
+            pmi={pmi}
+            loan={loan}
           />
         );
       }
