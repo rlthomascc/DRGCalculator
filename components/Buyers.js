@@ -37,6 +37,8 @@ class Buyers extends Component {
     super(props);
     this.state = {
       pickerDisplay: false,
+      countyDisplay: false,
+      county: 'Stanislaus',
       loan: 'Conventional',
       view: 'form',
       home: '',
@@ -75,6 +77,10 @@ class Buyers extends Component {
   changeLoan = (e) => { this.setState({ loan: e }); }
 
   togglePicker = (e) => { this.setState({ pickerDisplay: e }); }
+
+  toggleCounty = (e) => { this.setState({ countyDisplay: e }); }
+
+  changeCounty = (e) => { this.setState({ county: e }); }
 
   changePMI = (e) => { this.setState({ pmi: e }); }
 
@@ -149,7 +155,18 @@ class Buyers extends Component {
 
 
     renderView = () => {
-      const { view, loan, pickerDisplay } = this.state;
+      const {
+        view, loan, pickerDisplay, countyDisplay,
+      } = this.state;
+      const countyValues = [{
+        title: 'San Joaquin',
+        value: 'San Joaquin',
+
+      },
+      {
+        title: 'Stanislaus',
+        value: 'Stanislaus',
+      }];
       const pickerValues = [{
         title: 'Conventional',
         value: 'Conventional',
@@ -183,6 +200,62 @@ class Buyers extends Component {
                 />
               </View>
 
+
+              <View style={{ paddingBottom: 30 }}>
+                <Text
+                  style={{
+
+                    fontWeight: 'bold',
+                  }}
+                  onPress={() => this.toggleCounty(true)}
+                >
+                  <Icon name="ios-arrow-down" size={20} />
+                  {'   '}
+                  {this.state.county}
+
+                </Text>
+              </View>
+
+
+              <Modal visible={countyDisplay} animationType="slide" transparent={true} onRequestClose={() => console.log('Close was requested')}>
+                <View style={{
+                  margin: 20,
+                  padding: 20,
+                  backgroundColor: '#efefef',
+                  bottom: 20,
+                  left: 20,
+                  right: 20,
+                  position: 'absolute',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+                >
+                  <Text style={{
+                    fontWeight: 'bold', alignItems: 'center', marginBottom: 15,
+                  }}
+                  >
+Specify County:
+                    {' '}
+
+                  </Text>
+                  {countyValues.map((value, index) => (
+                    <TouchableHighlight
+                      key={index}
+                      onPress={() => this.changeCounty(value.value)}
+                      style={{
+                        paddingTop: 5, paddingBottom: 5, alignItems: 'center',
+                      }}
+                    >
+                      <Text style={{ fontSize: 20 }}>{value.title}</Text>
+                    </TouchableHighlight>
+                  ))}
+                  <TouchableHighlight style={{ paddingTop: 4, paddingBottom: 4, alignItems: 'center' }}>
+                    <Text onPress={() => this.toggleCounty(false)} style={{ color: '#999', fontSize: 18 }}>Close</Text>
+                  </TouchableHighlight>
+                </View>
+              </Modal>
+
+
               <View style={{ paddingBottom: 30 }}>
                 <Text
                   style={{
@@ -193,7 +266,7 @@ class Buyers extends Component {
                 >
                   <Icon name="ios-arrow-down" size={20} />
                   {'   '}
-                  Conventional
+                  {this.state.loan}
 
                 </Text>
               </View>
@@ -241,7 +314,7 @@ Please pick a Loan Type:
                 ref={c => this._form = c}
                 type={Values.funcs.Conventional}
                 options={Values.funcs.Conventionaloptions}
-                value={Values.funcs.Conventionalvalue}
+                value={this.state.county === 'Stanislaus' ? Values.funcs.Conventionalvalue : Values.funcs.SanJoaquinConventionalvalue}
               />
               <View style={Styles.styles.button}>
                 <Button
@@ -271,6 +344,62 @@ Please pick a Loan Type:
                 />
               </View>
 
+
+              <View style={{ paddingBottom: 30 }}>
+                <Text
+                  style={{
+
+                    fontWeight: 'bold',
+                  }}
+                  onPress={() => this.toggleCounty(true)}
+                >
+                  <Icon name="ios-arrow-down" size={20} />
+                  {'   '}
+                  {this.state.county}
+
+                </Text>
+              </View>
+
+
+              <Modal visible={countyDisplay} animationType="slide" transparent={true} onRequestClose={() => console.log('Close was requested')}>
+                <View style={{
+                  margin: 20,
+                  padding: 20,
+                  backgroundColor: '#efefef',
+                  bottom: 20,
+                  left: 20,
+                  right: 20,
+                  position: 'absolute',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+                >
+                  <Text style={{
+                    fontWeight: 'bold', alignItems: 'center', marginBottom: 15,
+                  }}
+                  >
+Specify County:
+                    {' '}
+
+                  </Text>
+                  {countyValues.map((value, index) => (
+                    <TouchableHighlight
+                      key={index}
+                      onPress={() => this.changeCounty(value.value)}
+                      style={{
+                        paddingTop: 5, paddingBottom: 5, alignItems: 'center',
+                      }}
+                    >
+                      <Text style={{ fontSize: 20 }}>{value.title}</Text>
+                    </TouchableHighlight>
+                  ))}
+                  <TouchableHighlight style={{ paddingTop: 4, paddingBottom: 4, alignItems: 'center' }}>
+                    <Text onPress={() => this.toggleCounty(false)} style={{ color: '#999', fontSize: 18 }}>Close</Text>
+                  </TouchableHighlight>
+                </View>
+              </Modal>
+
+
               <View style={{ paddingBottom: 30 }}>
                 <Text
                   style={{
@@ -281,7 +410,7 @@ Please pick a Loan Type:
                 >
                   <Icon name="ios-arrow-down" size={20} />
                   {'   '}
-                  FHA
+                  {this.state.loan}
 
                 </Text>
               </View>
@@ -329,7 +458,7 @@ Please pick a Loan Type:
                 ref={c => this._form = c}
                 type={Values.funcs.FHA}
                 options={Values.funcs.FHAoptions}
-                value={Values.funcs.FHAvalue}
+                value={this.state.county === 'Stanislaus' ? Values.funcs.FHAvalue : Values.funcs.SanJoaquinFHAvalue}
               />
               <View style={Styles.styles.button}>
                 <Button
@@ -359,6 +488,62 @@ Please pick a Loan Type:
                 />
               </View>
 
+
+              <View style={{ paddingBottom: 30 }}>
+                <Text
+                  style={{
+
+                    fontWeight: 'bold',
+                  }}
+                  onPress={() => this.toggleCounty(true)}
+                >
+                  <Icon name="ios-arrow-down" size={20} />
+                  {'   '}
+                  {this.state.county}
+
+                </Text>
+              </View>
+
+
+              <Modal visible={countyDisplay} animationType="slide" transparent={true} onRequestClose={() => console.log('Close was requested')}>
+                <View style={{
+                  margin: 20,
+                  padding: 20,
+                  backgroundColor: '#efefef',
+                  bottom: 20,
+                  left: 20,
+                  right: 20,
+                  position: 'absolute',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+                >
+                  <Text style={{
+                    fontWeight: 'bold', alignItems: 'center', marginBottom: 15,
+                  }}
+                  >
+Specify County:
+                    {' '}
+
+                  </Text>
+                  {countyValues.map((value, index) => (
+                    <TouchableHighlight
+                      key={index}
+                      onPress={() => this.changeCounty(value.value)}
+                      style={{
+                        paddingTop: 5, paddingBottom: 5, alignItems: 'center',
+                      }}
+                    >
+                      <Text style={{ fontSize: 20 }}>{value.title}</Text>
+                    </TouchableHighlight>
+                  ))}
+                  <TouchableHighlight style={{ paddingTop: 4, paddingBottom: 4, alignItems: 'center' }}>
+                    <Text onPress={() => this.toggleCounty(false)} style={{ color: '#999', fontSize: 18 }}>Close</Text>
+                  </TouchableHighlight>
+                </View>
+              </Modal>
+
+
               <View style={{ paddingBottom: 30 }}>
                 <Text
                   style={{
@@ -369,7 +554,7 @@ Please pick a Loan Type:
                 >
                   <Icon name="ios-arrow-down" size={20} />
                   {'   '}
-                  VA
+                  {this.state.loan}
 
                 </Text>
               </View>
@@ -417,7 +602,7 @@ Please pick a Loan Type:
                 ref={c => this._form = c}
                 type={Values.funcs.VA}
                 options={Values.funcs.VAoptions}
-                value={Values.funcs.VAvalue}
+                value={this.state.county === 'Stanislaus' ? Values.funcs.VAvalue : Values.funcs.SanJoaquinVAvalue}
               />
               <View style={Styles.styles.button}>
                 <Button
@@ -447,6 +632,62 @@ Please pick a Loan Type:
                 />
               </View>
 
+
+              <View style={{ paddingBottom: 30 }}>
+                <Text
+                  style={{
+
+                    fontWeight: 'bold',
+                  }}
+                  onPress={() => this.toggleCounty(true)}
+                >
+                  <Icon name="ios-arrow-down" size={20} />
+                  {'   '}
+                  {this.state.county}
+
+                </Text>
+              </View>
+
+
+              <Modal visible={countyDisplay} animationType="slide" transparent={true} onRequestClose={() => console.log('Close was requested')}>
+                <View style={{
+                  margin: 20,
+                  padding: 20,
+                  backgroundColor: '#efefef',
+                  bottom: 20,
+                  left: 20,
+                  right: 20,
+                  position: 'absolute',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+                >
+                  <Text style={{
+                    fontWeight: 'bold', alignItems: 'center', marginBottom: 15,
+                  }}
+                  >
+Specify County:
+                    {' '}
+
+                  </Text>
+                  {countyValues.map((value, index) => (
+                    <TouchableHighlight
+                      key={index}
+                      onPress={() => this.changeCounty(value.value)}
+                      style={{
+                        paddingTop: 5, paddingBottom: 5, alignItems: 'center',
+                      }}
+                    >
+                      <Text style={{ fontSize: 20 }}>{value.title}</Text>
+                    </TouchableHighlight>
+                  ))}
+                  <TouchableHighlight style={{ paddingTop: 4, paddingBottom: 4, alignItems: 'center' }}>
+                    <Text onPress={() => this.toggleCounty(false)} style={{ color: '#999', fontSize: 18 }}>Close</Text>
+                  </TouchableHighlight>
+                </View>
+              </Modal>
+
+
               <View style={{ paddingBottom: 30 }}>
                 <Text
                   style={{
@@ -457,7 +698,7 @@ Please pick a Loan Type:
                 >
                   <Icon name="ios-arrow-down" size={20} />
                   {'   '}
-                  Cash
+                  {this.state.loan}
 
                 </Text>
               </View>
@@ -505,7 +746,7 @@ Please pick a Loan Type:
                 ref={c => this._form = c}
                 type={Values.funcs.Cash}
                 options={Values.funcs.Cashoptions}
-                value={Values.funcs.Cashvalue}
+                value={this.state.county === 'Stanislaus' ? Values.funcs.Cashvalue : Values.funcs.SanJoaquinCashvalue}
               />
               <View style={Styles.styles.button}>
                 <Button

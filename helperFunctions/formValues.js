@@ -191,6 +191,62 @@ const Cashvalue = {
   taxes: '1.25%',
 };
 
+
+// VALUES
+// VALUES
+// VALUES
+// VALUES
+// VALUES
+// VALUES
+// VALUES
+// VALUES
+// VALUES
+// VALUES
+// VALUES
+// VALUES
+// VALUES
+// VALUES
+// VALUES
+// VALUES
+// VALUES
+// VALUES
+// VALUES
+// VALUES
+// VALUES
+
+
+const SanJoaquinConventionalvalue = {
+  downPayment: '10.0%',
+  interestRate: '4.625%',
+  term: '30',
+  hazardInsurance: '0.35%',
+  taxes: '1.25%',
+};
+
+const SanJoaquinVAvalue = {
+  maxVA: '$484,350',
+  downPayment: '0.0%',
+  interestRate: '4.75%',
+  term: '30',
+  hazardInsurance: '0.35%',
+  taxes: '1.25%',
+};
+
+const SanJoaquinFHAvalue = {
+  maxFHA: '$425,500',
+  downPayment: '3.5%',
+  interestRate: '4.625%',
+  term: '30',
+  hazardInsurance: '0.35%',
+  taxes: '1.25%',
+};
+
+const SanJoaquinCashvalue = {
+  hazardInsurance: '0.35%',
+  taxes: '1.25%',
+};
+
+
 const funcs = {
   FHAoptions,
   FHA,
@@ -204,6 +260,10 @@ const funcs = {
   Cash,
   Cashvalue,
   Cashoptions,
+  SanJoaquinConventionalvalue,
+  SanJoaquinVAvalue,
+  SanJoaquinFHAvalue,
+  SanJoaquinCashvalue,
 };
 
 module.exports.funcs = funcs;
