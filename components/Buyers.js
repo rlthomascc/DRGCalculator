@@ -25,6 +25,8 @@ import Styles from '../styling/styles';
 import FHACalcs from '../helperFunctions/FHAcalculations';
 import PMICalc from '../helperFunctions/PMICalc';
 import Values from '../helperFunctions/formValues';
+import VAOutput from './VAOutput';
+import CashOutput from './CashOutput';
 
 
 const Form = t.form.Form;
@@ -37,6 +39,8 @@ class Buyers extends Component {
       pickerDisplay: false,
       loan: 'Conventional',
       view: 'form',
+      home: '',
+      escrowFee: '',
       down: '',
       taxes: '',
       insurance: '',
@@ -74,6 +78,10 @@ class Buyers extends Component {
 
   changePMI = (e) => { this.setState({ pmi: e }); }
 
+  changeHome = (e) => { this.setState({ home: e }); }
+
+  changeEscrowFee = (e) => { this.setState({ escrowFee: e }); }
+
   changeClosingCosts = (lendersTitlePolicy, escrowFee, origFee, proratedTax, prepaidInsurance, prepaidTaxes, prepaidInterest) => {
     this.setState({
       closingCosts: {
@@ -88,6 +96,15 @@ class Buyers extends Component {
     });
   }
 
+  cashBack = (tax, mip, insurance, pAndI, prepaids, fixed, bringToClose, lendersTitlePolicy, escrowFee, origFee, proratedTax, prepaidInsurance, prepaidTaxes, prepaidInterest) => {
+    this.changeTaxes(tax);
+    this.changeInsurance(insurance);
+    this.changeFixed(fixed);
+    this.bringToClose(bringToClose);
+    this.changeMIP(mip);
+    this.changeClosingCosts(0, escrowFee, 150, 325, 95, 192, 0);
+    this.changeEscrowFee(escrowFee);
+  }
 
   dataBack = (tax, mip, insurance, pAndI, prepaids, fixed, bringToClose, lendersTitlePolicy, escrowFee, origFee, proratedTax, prepaidInsurance, prepaidTaxes, prepaidInterest) => {
     this.changeTaxes(tax);
@@ -109,18 +126,26 @@ class Buyers extends Component {
     this.changePMI(pmi);
   }
 
-    handleSubmit = () => {
-      const value = this._form.getValue(); // use that ref to get the form value
-      FHACalcs.funcs.calculateDownPayment(value.homePrice,
-        value.downPayment, this.downBack);
-      FHACalcs.funcs.calculateAll(value.homePrice,
-        value.downPayment,
-        value.taxes,
-        value.hazardInsurance,
-        value.interestRate,
-        value.term, this.dataBack);
-      PMICalc.funcs.calculateAll(value.homePrice, value.downPayment, this.pmiBack);
-    }
+
+  handleCashSubmit = () => {
+    const value = this._form.getValue();
+    FHACalcs.funcs.calculateAll(value.homePrice, '0%', value.taxes, value.hazardInsurance, '0%', '0%', this.cashBack);
+    this.changeHome(value.homePrice);
+    this.changeView('output');
+  }
+
+  handleSubmit = () => {
+    const value = this._form.getValue(); // use that ref to get the form value
+    FHACalcs.funcs.calculateDownPayment(value.homePrice,
+      value.downPayment, this.downBack);
+    FHACalcs.funcs.calculateAll(value.homePrice,
+      value.downPayment,
+      value.taxes,
+      value.hazardInsurance,
+      value.interestRate,
+      value.term, this.dataBack);
+    PMICalc.funcs.calculateAll(value.homePrice, value.downPayment, this.pmiBack);
+  }
 
 
     renderView = () => {
@@ -485,7 +510,7 @@ Please pick a Loan Type:
               <View style={Styles.styles.button}>
                 <Button
                   title="Calculate"
-                  onPress={this.handleSubmit}
+                  onPress={this.handleCashSubmit}
                   color="white"
                 />
               </View>
@@ -493,7 +518,7 @@ Please pick a Loan Type:
           </ScrollView>
         );
       }
-      if (view === 'output') {
+      if (view === 'output' && loan === 'Conventional') {
         const {
           down, taxes, insurance, pAndL, prepaids, fixed, bringToClose, mip, pmi, loan,
         } = this.state;
@@ -512,6 +537,65 @@ Please pick a Loan Type:
             loan={loan}
           />
         );
+      }
+      if (view === 'output' && loan === 'FHA') {
+        const {
+          down, taxes, insurance, pAndL, prepaids, fixed, bringToClose, mip, pmi, loan,
+        } = this.state;
+        return (
+          <Output
+            viewChange={this.changeView}
+            down={down}
+            taxes={taxes}
+            insurance={insurance}
+            pAndL={pAndL}
+            prepaids={prepaids}
+            fixed={fixed}
+            bringToClose={bringToClose}
+            mip={mip}
+            pmi={pmi}
+            loan={loan}
+          />
+        );
+      }
+      if (view === 'output' && loan === 'VA') {
+        {
+          const {
+            down, taxes, insurance, pAndL, prepaids, fixed, bringToClose, mip, pmi, loan,
+          } = this.state;
+          return (
+            <VAOutput
+              viewChange={this.changeView}
+              down={down}
+              taxes={taxes}
+              insurance={insurance}
+              pAndL={pAndL}
+              prepaids={prepaids}
+              fixed={fixed}
+              bringToClose={bringToClose}
+              mip={mip}
+              pmi={pmi}
+              loan={loan}
+            />
+          );
+        }
+      }
+      if (view === 'output' && loan === 'Cash') {
+        {
+          const {
+            taxes, insurance, fixed, escrowFee, home,
+          } = this.state;
+          return (
+            <CashOutput
+              viewChange={this.changeView}
+              insurance={insurance}
+              taxes={taxes}
+              cash={home}
+              fixed={fixed}
+              escrowFee={escrowFee}
+            />
+          );
+        }
       }
       if (view === 'closingCosts') {
         const {
