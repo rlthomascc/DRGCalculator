@@ -36,6 +36,11 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     fontSize: 14,
   },
+  SellerClosingCosts: {
+    marginTop: 130,
+    paddingLeft: 20,
+    fontSize: 14,
+  },
   mainApp: {
     flex: 1,
     backgroundColor: '#fff',

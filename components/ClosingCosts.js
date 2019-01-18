@@ -21,25 +21,25 @@ class ClosingCosts extends Component {
 
         <View style={Styles.styles.container}>
           <Text style={Styles.styles.closingCosts}>
-            <Text style={{ fontWeight: 'bold', fontSize: 18 }}>Prepaid Costs: </Text>
+            <Text style={{ fontWeight: 'bold', fontSize: 18, color: '#cda135' }}>Prepaid Costs: </Text>
             {'\n'}
             14 Months Of Insurance: $
-            {closingCosts.prepaidInsurance.prepaidInsurance}
+            {closingCosts.prepaidInsurance.prepaidInsurance.toLocaleString(2)}
             {'\n'}
             2 Months Of Taxes: $
-            {closingCosts.prepaidTaxes.prepaidTaxes}
+            {closingCosts.prepaidTaxes.prepaidTaxes.toLocaleString(2)}
             {'\n'}
             30 Days Of Interest: $
-            {closingCosts.prepaidInterest.prepaidInterest}
+            {closingCosts.prepaidInterest.prepaidInterest.toLocaleString(2)}
             {'\n'}
             {'\n'}
-            <Text style={{ fontWeight: 'bold', fontSize: 18 }}>Title Fees: </Text>
+            <Text style={{ fontWeight: 'bold', fontSize: 18, color: '#cda135' }}>Title Fees: </Text>
             {'\n'}
             Lender's Title Policy: $
-            {closingCosts.lendersTitlePolicy.lendersTitlePolicy}
+            {closingCosts.lendersTitlePolicy.lendersTitlePolicy.toLocaleString(2)}
             {'\n'}
             Escrow Fee: $
-            {closingCosts.escrowFee.escrowFee}
+            {closingCosts.escrowFee.escrowFee.toLocaleString(2)}
             {'\n'}
             Endorsements: $25.00
             {'\n'}
@@ -52,10 +52,10 @@ class ClosingCosts extends Component {
             Whole House Inspection: $325.00
             {'\n'}
             {'\n'}
-            <Text style={{ fontWeight: 'bold', fontSize: 18 }}>Lender Fees: </Text>
+            <Text style={{ fontWeight: 'bold', fontSize: 18, color: '#cda135' }}>Lender Fees: </Text>
             {'\n'}
             Origination Fee: $
-            {closingCosts.origFee.origFee}
+            {closingCosts.origFee.origFee.toLocaleString(2)}
             {'\n'}
             Processing/Funding Fee: $400.00
             {'\n'}
@@ -70,10 +70,10 @@ class ClosingCosts extends Component {
             Appraisal: $450.00
             {'\n'}
             {'\n'}
-            <Text style={{ fontWeight: 'bold', fontSize: 16 }}>Other Fees: </Text>
+            <Text style={{ fontWeight: 'bold', fontSize: 18, color: '#cda135' }}>Other Fees: </Text>
             {'\n'}
             Prorated Tax Credit: -$
-            {closingCosts.proratedTax.proratedTax}
+            {closingCosts.proratedTax.proratedTax.toLocaleString(2)}
             {'\n'}
             RecordingFee: $192.00
             {'\n'}

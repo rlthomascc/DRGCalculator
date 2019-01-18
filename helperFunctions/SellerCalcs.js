@@ -7,7 +7,7 @@ calculateAll = (home, broker, taxes, interest, callback) => {
   const salesPrice = home; // <===== SALES PRICE
   const balance = home - home; // <==== BALANCE
   let escrowFee = '';
-  const ownersTitlePolicy = 0;// 'FIGURE ME OUT';
+  let ownersTitlePolicy = '';
   const countyTransferTax = 0;// 'FIGURE ME OUT';
 
   const escrowBack = price => escrowFee = price;
@@ -18,12 +18,20 @@ calculateAll = (home, broker, taxes, interest, callback) => {
     Helpers.funcs.escrowFeeRight(home, escrowBack);
   }
 
+  const ownersTitlePolicyBack = price => ownersTitlePolicy = price;
+  if (home >= 0 && home < 510000) {
+    Helpers.funcs.ownersTitlePolicyLeft(home, ownersTitlePolicyBack);
+  }
+  if (home >= 51000 && home < 1100000) {
+    Helpers.funcs.ownersTitlePolicyRight(home, ownersTitlePolicyBack);
+  }
+
+
   const netAtClose = home - brokerFee - brokerFee - ownersTitlePolicy - escrowFee - 99 - 150 - countyTransferTax - 70 - 95;
   const closingCosts = ownersTitlePolicy + escrowFee + 99 + 150 + countyTransferTax + 70 + 95 + brokerFee + brokerFee;
 
 
-  console.log(netAtClose);
-  callback(broker, salesPrice, balance, escrowFee, ownersTitlePolicy, countyTransferTax, netAtClose, closingCosts);
+  callback(brokerFee, salesPrice, balance, escrowFee, ownersTitlePolicy, countyTransferTax, netAtClose, closingCosts);
 };
 
 

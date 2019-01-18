@@ -35,7 +35,6 @@ class SellerOutput extends Component {
     } = this.props;
 
     const chart_wh = 185;
-    // FIGURE OUT HOW TO REMOVE COMMAS FROM ALL NUMBERS AND THE PIE CHART WILL WORK SUFFICENTLY
     const series1 = [salesPrice, balance, closingCosts, netAtClose];
     const sliceColor = ['#FF9800', '#2196F3', 'blue', '#FFEB3B'];
     return (
@@ -102,7 +101,8 @@ Closing Costs >
             <Text style={{ fontWeight: 'bold', color: '#FFEB3B' }}>Net At Close: </Text>
           $
             {netAtClose.toLocaleString(2)}
-
+            {'\n'}
+            {'\n'}
 
           </Text>
 
