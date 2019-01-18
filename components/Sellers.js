@@ -12,6 +12,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Styles from '../styling/styles';
 import SellerOutput from './SellerOutput';
 import SellerCalcs from '../helperFunctions/SellerCalcs';
+import ClosingCosts from './SellerClosingCosts';
 
 
 const Form = t.form.Form;
@@ -239,6 +240,22 @@ Please pick a Loan Type:
             escrowFee={escrowFee}
             countyTransferTax={countyTransferTax}
             buyersBrokersFee={buyersBrokersFee}
+            listingBrokersFee={listingBrokersFee}
+            closingCosts={closingCosts}
+          />
+        );
+      }
+      if (view === 'closingCosts') {
+        const {
+          ownersTitlePolicy, escrowFee, countyTransferTax, buyersBrokersFee, listingBrokersFee, closingCosts,
+        } = this.state;
+        return (
+          <ClosingCosts
+            changeView={this.changeView}
+            ownersTitlePolicy={ownersTitlePolicy}
+            escrowFee={escrowFee}
+            countyTransferTax={countyTransferTax}
+            buyersBrokerFee={buyersBrokersFee}
             listingBrokersFee={listingBrokersFee}
             closingCosts={closingCosts}
           />

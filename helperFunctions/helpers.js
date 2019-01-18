@@ -379,9 +379,199 @@ escrowFeeRight = (num, callback) => {
   }
 };
 
+function ownersTitlePolicyLeft(num, callback) {
+  if (num >= 0 && num < 110000) {
+    callback(605);
+  } else if (num >= 110000 && num < 120000) {
+    callback(635);
+  } else if (num >= 120000 && num < 130000) {
+    callback(665);
+  } else if (num >= 130000 && num < 140000) {
+    callback(695);
+  } else if (num >= 140000 && num < 150000) {
+    callback(724);
+  } else if (num >= 150000 && num < 160000) {
+    callback(754);
+  } else if (num >= 160000 && num < 170000) {
+    callback(784);
+  } else if (num >= 170000 && num < 180000) {
+    callback(813);
+  } else if (num >= 180000 && num < 190000) {
+    callback(843);
+  } else if (num >= 190000 && num < 200000) {
+    callback(873);
+  } else if (num >= 200000 && num < 210000) {
+    callback(902);
+  } else if (num >= 210000 && num < 220000) {
+    callback(932);
+  } else if (num >= 220000 && num < 230000) {
+    callback(962);
+  } else if (num >= 230000 && num < 240000) {
+    callback(992);
+  } else if (num >= 240000 && num < 250000) {
+    callback(1021);
+  } else if (num >= 250000 && num < 260000) {
+    callback(1051);
+  } else if (num >= 260000 && num < 270000) {
+    callback(1081);
+  } else if (num >= 270000 && num < 280000) {
+    callback(1110);
+  } else if (num >= 280000 && num < 290000) {
+    callback(1140);
+  } else if (num >= 290000 && num < 300000) {
+    callback(1170);
+  } else if (num >= 300000 && num < 310000) {
+    callback(1199);
+  } else if (num >= 310000 && num < 320000) {
+    callback(1217);
+  } else if (num >= 320000 && num < 330000) {
+    callback(1235);
+  } else if (num >= 330000 && num < 340000) {
+    callback(1252);
+  } else if (num >= 340000 && num < 350000) {
+    callback(1270);
+  } else if (num >= 350000 && num < 360000) {
+    callback(1287);
+  } else if (num >= 360000 && num < 370000) {
+    callback(1305);
+  } else if (num >= 370000 && num < 380000) {
+    callback(1323);
+  } else if (num >= 380000 && num < 390000) {
+    callback(1340);
+  } else if (num >= 390000 && num < 400000) {
+    callback(1358);
+  } else if (num >= 400000 && num < 410000) {
+    callback(1375);
+  } else if (num >= 410000 && num < 420000) {
+    callback(1393);
+  } else if (num >= 420000 && num < 430000) {
+    callback(1411);
+  } else if (num >= 430000 && num < 440000) {
+    callback(1428);
+  } else if (num >= 440000 && num < 450000) {
+    callback(1446);
+  } else if (num >= 450000 && num < 460000) {
+    callback(1463);
+  } else if (num >= 460000 && num < 470000) {
+    callback(1481);
+  } else if (num >= 470000 && num < 480000) {
+    callback(1499);
+  } else if (num >= 480000 && num < 490000) {
+    callback(1516);
+  } else if (num >= 490000 && num < 500000) {
+    callback(1534);
+  } else if (num >= 500000 && num < 510000) {
+    callback(1551);
+  }
+}
+
+function ownersTitlePolicyRight(num, callback) {
+  if (num >= 510000 && num < 520000) {
+    callback(1569);
+  } else if (num >= 520000 && num < 530000) {
+    callback(1587);
+  } else if (num >= 530000 && num < 540000) {
+    callback(1604);
+  } else if (num >= 540000 && num < 550000) {
+    callback(1622);
+  } else if (num >= 550000 && num < 560000) {
+    callback(1639);
+  } else if (num >= 560000 && num < 570000) {
+    callback(1657);
+  } else if (num >= 570000 && num < 580000) {
+    callback(1675);
+  } else if (num >= 580000 && num < 590000) {
+    callback(1692);
+  } else if (num >= 590000 && num < 600000) {
+    callback(1710);
+  } else if (num >= 600000 && num < 610000) {
+    callback(1727);
+  } else if (num >= 610000 && num < 620000) {
+    callback(1745);
+  } else if (num >= 620000 && num < 630000) {
+    callback(1763);
+  } else if (num >= 630000 && num < 640000) {
+    callback(1780);
+  } else if (num >= 640000 && num < 650000) {
+    callback(1798);
+  } else if (num >= 650000 && num < 660000) {
+    callback(1815);
+  } else if (num >= 660000 && num < 670000) {
+    callback(1833);
+  } else if (num >= 670000 && num < 680000) {
+    callback(1851);
+  } else if (num >= 680000 && num < 690000) {
+    callback(1868);
+  } else if (num >= 690000 && num < 700000) {
+    callback(1886);
+  } else if (num >= 700000 && num < 710000) {
+    callback(1903);
+  } else if (num >= 710000 && num < 720000) {
+    callback(1921);
+  } else if (num >= 720000 && num < 730000) {
+    callback(1939);
+  } else if (num >= 730000 && num < 740000) {
+    callback(1956);
+  } else if (num >= 740000 && num < 750000) {
+    callback(1974);
+  } else if (num >= 750000 && num < 760000) {
+    callback(1991);
+  } else if (num >= 760000 && num < 770000) {
+    callback(2009);
+  } else if (num >= 770000 && num < 780000) {
+    callback(2027);
+  } else if (num >= 780000 && num < 790000) {
+    callback(2044);
+  } else if (num >= 790000 && num < 800000) {
+    callback(2062);
+  } else if (num >= 800000 && num < 810000) {
+    callback(2079);
+  } else if (num >= 810000 && num < 820000) {
+    callback(2097);
+  } else if (num >= 820000 && num < 830000) {
+    callback(2115);
+  } else if (num >= 830000 && num < 840000) {
+    callback(2132);
+  } else if (num >= 840000 && num < 850000) {
+    callback(2150);
+  } else if (num >= 850000 && num < 860000) {
+    callback(2167);
+  } else if (num >= 860000 && num < 870000) {
+    callback(2185);
+  } else if (num >= 870000 && num < 880000) {
+    callback(2203);
+  } else if (num >= 880000 && num < 890000) {
+    callback(2220);
+  } else if (num >= 890000 && num < 890000) {
+    callback(2238);
+  } else if (num >= 900000 && num < 910000) {
+    callback(2255);
+  } else if (num >= 910000 && num < 920000) {
+    callback(2273);
+  } else if (num >= 920000 && num < 930000) {
+    callback(2291);
+  } else if (num >= 930000 && num < 940000) {
+    callback(2308);
+  } else if (num >= 940000 && num < 950000) {
+    callback(2326);
+  } else if (num >= 950000 && num < 960000) {
+    callback(2343);
+  } else if (num >= 960000 && num < 970000) {
+    callback(2361);
+  } else if (num >= 970000 && num < 980000) {
+    callback(2379);
+  } else if (num >= 980000 && num < 990000) {
+    callback(2396);
+  } else if (num >= 990000 && num < 1000000) {
+    callback(2414);
+  } else if (num >= 1000000 && num < 1010000) {
+    callback(2431);
+  }
+}
+
 
 const funcs = {
-  lenderTitlePolicyLeft, lenderTitlePolicyRight, escrowFeeRight, escrowFeeLeft,
+  lenderTitlePolicyLeft, lenderTitlePolicyRight, escrowFeeRight, escrowFeeLeft, ownersTitlePolicyLeft, ownersTitlePolicyRight,
 };
 
 module.exports.funcs = funcs;

@@ -23,7 +23,7 @@ import Output from './Output';
 import ClosingCosts from './ClosingCosts';
 import Styles from '../styling/styles';
 import FHACalcs from '../helperFunctions/FHAcalculations';
-import ConventionalCalcs from '../helperFunctions/Conventionalcalculations';
+import PMICalc from '../helperFunctions/PMICalc';
 import Values from '../helperFunctions/formValues';
 
 
@@ -89,7 +89,7 @@ class Buyers extends Component {
   }
 
 
-  dataBack = (tax, mip, insurance, pAndI, prepaids, fixed, bringToClose, lendersTitlePolicy, escrowFee, origFee, proratedTax, prepaidInsurance, prepaidTaxes, prepaidInterest, pmi) => {
+  dataBack = (tax, mip, insurance, pAndI, prepaids, fixed, bringToClose, lendersTitlePolicy, escrowFee, origFee, proratedTax, prepaidInsurance, prepaidTaxes, prepaidInterest) => {
     this.changeTaxes(tax);
     this.changeInsurance(insurance);
     this.changePAndI(pAndI);
@@ -97,13 +97,16 @@ class Buyers extends Component {
     this.changeFixed(fixed);
     this.bringToClose(bringToClose);
     this.changeMIP(mip);
-    this.changePMI(pmi);
     this.changeClosingCosts(lendersTitlePolicy, escrowFee, origFee, proratedTax, prepaidInsurance, prepaidTaxes, prepaidInterest.toLocaleString(2));
   }
 
   downBack = (view, down) => {
     this.changeView(view);
     this.changeDown(down);
+  }
+
+  pmiBack = (pmi) => {
+    this.changePMI(pmi);
   }
 
     handleSubmit = () => {
@@ -116,6 +119,7 @@ class Buyers extends Component {
         value.hazardInsurance,
         value.interestRate,
         value.term, this.dataBack);
+      PMICalc.funcs.calculateAll(value.homePrice, value.downPayment, this.pmiBack);
     }
 
 
@@ -379,7 +383,7 @@ Please pick a Loan Type:
                     </TouchableHighlight>
                   ))}
                   <TouchableHighlight style={{ paddingTop: 4, paddingBottom: 4, alignItems: 'center' }}>
-                    <Text onPress={() => this.togglePicker(false)} style={{ color: '#999', fontSize: 16 }}>Cancel</Text>
+                    <Text onPress={() => this.togglePicker(false)} style={{ color: '#999', fontSize: 18 }}>Close</Text>
                   </TouchableHighlight>
                 </View>
               </Modal>
@@ -467,7 +471,7 @@ Please pick a Loan Type:
                     </TouchableHighlight>
                   ))}
                   <TouchableHighlight style={{ paddingTop: 4, paddingBottom: 4, alignItems: 'center' }}>
-                    <Text onPress={() => this.togglePicker(false)} style={{ color: '#999', fontSize: 16 }}>Cancel</Text>
+                    <Text onPress={() => this.togglePicker(false)} style={{ color: '#999', fontSize: 18 }}>Close</Text>
                   </TouchableHighlight>
                 </View>
               </Modal>
@@ -511,12 +515,13 @@ Please pick a Loan Type:
       }
       if (view === 'closingCosts') {
         const {
-          closingCosts,
+          closingCosts, loan,
         } = this.state;
         return (
           <ClosingCosts
             viewChange={this.changeView}
             closingCosts={closingCosts}
+            loan={loan}
           />
         );
       }
