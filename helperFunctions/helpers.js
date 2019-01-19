@@ -599,7 +599,6 @@ changeDownToPercent = (num, callback) => {
 
 
 changeToPercent = (num, callback) => {
-  console.log(num, 'num in change');
   const price = num.split('');
   let join = '';
   const number = '';
@@ -608,7 +607,6 @@ changeToPercent = (num, callback) => {
   } else {
     price.push('%');
     join = price.join('');
-    console.log(join, 'join in change');
     callback(join);
   }
 };

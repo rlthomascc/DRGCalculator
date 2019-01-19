@@ -6,9 +6,7 @@ calculateDownPayment = (home, downPay, callback) => {
   let down = '';
   const bringDownBack = (price => down = price);
   Helpers.funcs.changeToPercent(downPay, bringDownBack);
-  console.log(down, 'down in calcs');
   const decimal = down.slice(0, -1);
-  console.log(decimal, 'decimal in calcs');
   const percent = decimal / 100;
   const downPayment = Math.round(home * percent);
   // const final = downPayment.toLocaleString();
