@@ -292,7 +292,10 @@ Specify County:
 Please pick a Loan Type:
                     {' '}
 
+
                   </Text>
+
+
                   {pickerValues.map((value, index) => (
                     <TouchableHighlight
                       key={index}
