@@ -27,7 +27,6 @@ export default createMaterialBottomTabNavigator({
     screen: Buyers,
     navigationOptions: {
       tabBarLabel: 'Buyers',
-      onPress: console.log('test'),
       tabBarIcon: ({ tintColor }) => (
         <Icon name="ios-home" color={tintColor} size={25} />
       ),
