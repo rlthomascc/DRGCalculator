@@ -2,7 +2,10 @@
 // DOWN PAYMENT CALCULATIONS
 import Helpers from './helpers';
 
-calculateDownPayment = (home, down, callback) => {
+calculateDownPayment = (home, downPay, callback) => {
+  let down = '';
+  const bringDownBack = (price => down = price);
+  Helpers.funcs.changeToPercent(downPay, bringDownBack);
   const decimal = down.slice(0, -1);
   const percent = decimal / 100;
   const downPayment = Math.round(home * percent);
@@ -11,8 +14,11 @@ calculateDownPayment = (home, down, callback) => {
 };
 
 // WHERE ALL THE MATH IS DONE
-calculateAll = (home, down, taxes, insurance, interest, term, callback) => {
+calculateAll = (home, down, taxee, insuranceRa, interestRa, term, callback) => {
   // TAXES
+  let taxes = '';
+  const bringTaxBack = (price => taxes = price);
+  Helpers.funcs.changeToPercent(taxee, bringTaxBack);
   const taxesDecimal = taxes.slice(0, -1);
   const taxesPercent = taxesDecimal / 100;
   const taxesDifference = home * taxesPercent;
@@ -33,6 +39,9 @@ calculateAll = (home, down, taxes, insurance, interest, term, callback) => {
 
 
   // INSURANCE
+  let insurance = '';
+  const bringInsuranceBack = (price => insurance = price);
+  Helpers.funcs.changeToPercent(insuranceRa, bringInsuranceBack);
   const insuranceDecimal = insurance.slice(0, -1);
   const insurancePercent = insuranceDecimal / 100;
   const insuranceDifference = home * insurancePercent;
@@ -42,6 +51,9 @@ calculateAll = (home, down, taxes, insurance, interest, term, callback) => {
 
 
   // P AND I
+  let interest = '';
+  const bringInterestBack = (price => interest = price);
+  Helpers.funcs.changeToPercent(interestRa, bringInterestBack);
   const PAndLDecimal = interest.slice(0, -1);
   const PAndLPercent = PAndLDecimal / 100;
   const PAndLInterest = PAndLPercent / 12;

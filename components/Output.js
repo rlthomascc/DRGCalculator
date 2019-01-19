@@ -45,7 +45,32 @@ class Output extends Component {
           </View>
 
 
-          <View style={Styles.styles.pieChart}>
+          <Text style={Styles.styles.pieChartText}>
+
+
+            {'\n'}
+            {'\n'}
+            <Text style={{
+              fontWeight: 'bold', color: '#cda135', textAlign: 'center', marginTop: 10,
+            }}
+            >
+Monthly Payment:
+              {' '}
+
+            </Text>
+        $
+            {Math.round((pAndL + insurance + taxes + pmi) * 100) / 100}
+            {'\n'}
+          </Text>
+
+
+          <View style={{
+            justifyContent: 'center',
+            backgroundColor: 'white',
+            padding: 10,
+            alignItems: 'center',
+          }}
+          >
 
             <StatusBar
               hidden

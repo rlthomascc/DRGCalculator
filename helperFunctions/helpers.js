@@ -570,8 +570,23 @@ function ownersTitlePolicyRight(num, callback) {
 }
 
 
+function changeToPercent(num, callback) {
+  const price = num.split('');
+  let join = '';
+  let number = '';
+  if (price[-1] !== '%') {
+    price.push('%');
+    join = price.join('');
+    number = join.slice(0, -1);
+    callback(number);
+  }
+  if (price[-1] === '%') {
+    callback(num);
+  }
+}
+
 const funcs = {
-  lenderTitlePolicyLeft, lenderTitlePolicyRight, escrowFeeRight, escrowFeeLeft, ownersTitlePolicyLeft, ownersTitlePolicyRight,
+  lenderTitlePolicyLeft, lenderTitlePolicyRight, escrowFeeRight, escrowFeeLeft, ownersTitlePolicyLeft, ownersTitlePolicyRight, changeToPercent,
 };
 
 module.exports.funcs = funcs;

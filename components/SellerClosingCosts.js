@@ -71,13 +71,8 @@ Total Closing Costs:
             {'\n'}
             Recording Fee: $70.00
             {'\n'}
-            Termite Inspection: $95.00
-            {'\n'}
-            Buyers Broker Fee (3%): $
-            {buyersBrokerFee.toLocaleString(2)}
-            {'\n'}
-            Listing Broker Fee (3%): $
-            {listingBrokersFee.toLocaleString(2)}
+            Broker Fee (Split Between Agents): $
+            {(buyersBrokerFee + listingBrokersFee).toLocaleString(2)}
             {'\n'}
             {'\n'}
 

@@ -32,11 +32,13 @@ class SellerOutput extends Component {
       buyersBrokersFee,
       listingBrokersFee,
       closingCosts,
+      loanBal,
     } = this.props;
 
     const chart_wh = 185;
     const series1 = [salesPrice, balance, closingCosts, netAtClose];
     const sliceColor = ['#FF9800', '#2196F3', 'blue', '#FFEB3B'];
+    console.log(loanBal, 'loanBal');
     return (
       <ScrollView>
         <View style={Styles.styles.output}>
@@ -100,7 +102,7 @@ Closing Costs >
 
             <Text style={{ fontWeight: 'bold', color: '#FFEB3B' }}>Net At Close: </Text>
           $
-            {netAtClose.toLocaleString(2)}
+            {(netAtClose - loanBal).toLocaleString(2)}
             {'\n'}
             {'\n'}
 

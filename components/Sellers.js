@@ -25,6 +25,9 @@ const options = {
     brokerFee: {
       label: 'Broker Fee',
     },
+    loanBal: {
+      label: 'Loan Balance',
+    },
   },
 };
 
@@ -32,6 +35,7 @@ const User = t.struct({
   salesPrice: t.Number,
   brokerFee: t.String,
   propTaxes: t.String,
+  loanBal: t.maybe(t.Number),
   interestRate: t.String,
 });
 
@@ -57,6 +61,7 @@ class Sellers extends Component {
       buyersBrokersFee: '',
       listingBrokersFee: '',
       closingCosts: '',
+      loanBal: '',
     };
   }
 
@@ -84,9 +89,12 @@ class Sellers extends Component {
 
   changeClosingCosts = (e) => { this.setState({ closingCosts: e }); }
 
+  changeLoanBal = (e) => { this.setState({ loanBal: e }); }
+
 
   handleSubmit = () => {
     const value = this._form.getValue(); // use that ref to get the form value
+    this.changeLoanBal(value.loanBal);
     SellerCalcs.funcs.calculateAll(value.salesPrice, value.brokerFee, value.propTaxes, value.interestRate, this.bringItBack);
   }
 
@@ -476,7 +484,7 @@ Please pick a Loan Type:
       }
       if (view === 'output') {
         const {
-          view, loan, salesPrice, balance, netAtClose, ownersTitlePolicy, escrowFee, countyTransferTax, buyersBrokersFee, listingBrokersFee, closingCosts,
+          view, loan, salesPrice, balance, netAtClose, ownersTitlePolicy, escrowFee, countyTransferTax, buyersBrokersFee, listingBrokersFee, closingCosts, loanBal,
         } = this.state;
         return (
           <SellerOutput
@@ -492,12 +500,13 @@ Please pick a Loan Type:
             buyersBrokersFee={buyersBrokersFee}
             listingBrokersFee={listingBrokersFee}
             closingCosts={closingCosts}
+            loanBal={loanBal}
           />
         );
       }
       if (view === 'closingCosts') {
         const {
-          ownersTitlePolicy, escrowFee, countyTransferTax, buyersBrokersFee, listingBrokersFee, closingCosts,
+          ownersTitlePolicy, escrowFee, countyTransferTax, buyersBrokersFee, listingBrokersFee, closingCosts, loanBal,
         } = this.state;
         return (
           <ClosingCosts
@@ -508,6 +517,7 @@ Please pick a Loan Type:
             buyersBrokerFee={buyersBrokersFee}
             listingBrokersFee={listingBrokersFee}
             closingCosts={closingCosts}
+            loanBal={loanBal}
           />
         );
       }
