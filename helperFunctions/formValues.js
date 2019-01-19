@@ -4,19 +4,31 @@ const FHAoptions = {
   fields: {
     maxFHA: {
       label: 'Max FHA',
+      returnKeyType: 'done',
     },
     homePrice: {
       label: 'Home Price',
       placeholder: 'Required',
+      returnKeyType: 'done',
+      // onSubmitEditing: () => this.refs.form.getComponent('password').refs.input.focus();
     },
     downPayment: {
       label: 'Down Payment',
+      returnKeyType: 'done',
     },
     interestRate: {
       label: 'Interest Rate',
+      returnKeyType: 'done',
     },
     hazardInsurance: {
       label: 'Hazard Insurance',
+      returnKeyType: 'done',
+    },
+    taxes: {
+      returnKeyType: 'done',
+    },
+    term: {
+      returnKeyType: 'done',
     },
     // hoa: {
     //   label: 'HOA',
@@ -60,15 +72,25 @@ const Conventionaloptions = {
     homePrice: {
       label: 'Home Price',
       placeholder: 'Required',
+      returnKeyType: 'done',
     },
     downPayment: {
       label: 'Down Payment',
+      returnKeyType: 'done',
     },
     interestRate: {
       label: 'Interest Rate',
+      returnKeyType: 'done',
     },
     hazardInsurance: {
       label: 'Hazard Insurance',
+      returnKeyType: 'done',
+    },
+    term: {
+      returnKeyType: 'done',
+    },
+    taxes: {
+      returnKeyType: 'done',
     },
     // hoa: {
     //   label: 'HOA',
@@ -112,19 +134,30 @@ const VAoptions = {
   fields: {
     maxVA: {
       label: 'Max VA',
+      returnKeyType: 'done',
     },
     homePrice: {
       label: 'Home Price',
       placeholder: 'Required',
+      returnKeyType: 'done',
     },
     downPayment: {
       label: 'Down Payment',
+      returnKeyType: 'done',
     },
     interestRate: {
       label: 'Interest Rate',
+      returnKeyType: 'done',
     },
     hazardInsurance: {
       label: 'Hazard Insurance',
+      returnKeyType: 'done',
+    },
+    term: {
+      returnKeyType: 'done',
+    },
+    taxes: {
+      returnKeyType: 'done',
     },
     // hoa: {
     //   label: 'HOA',
@@ -173,9 +206,14 @@ const Cashoptions = {
     homePrice: {
       label: 'Home Price',
       placeholder: 'Required',
+      returnKeyType: 'done',
     },
     hazardInsurance: {
       label: 'Hazard Insurance',
+      returnKeyType: 'done',
+    },
+    taxes: {
+      returnKeyType: 'done',
     },
   },
 };

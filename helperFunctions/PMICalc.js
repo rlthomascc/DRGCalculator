@@ -1,5 +1,10 @@
+import Helpers from './helpers';
 
-calculateAll = (home, down, callback) => {
+
+calculateAll = (home, downPay, callback) => {
+  let down = '';
+  const bringDownBack = (price => down = price);
+  Helpers.funcs.changeToPercent(downPay, bringDownBack);
   const downPercentage = down.slice(0, -1);
   const downDecimal = downPercentage / 100;
   const downPayment = home * downDecimal;
