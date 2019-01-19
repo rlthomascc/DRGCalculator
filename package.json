@@ -1,22 +1,5 @@
 {
   "main": "node_modules/expo/AppEntry.js",
-  "expo": {
-    "name": "delrealgroupcalc",
-    "description": "The Official Del Real Group Mortgage Calculator",
-    "slug": "delrealgroupcalc",
-    "privacy": "public",
-    "sdkVersion": "24.0.0",
-    "platforms": ["ios", "android"],
-    "version": "1.0.0",
-    "orientation": "portrait"
-  },
-  "ios": {
-    "supportsTablet": true,
-    "bundleIdentifier": "com.delrealgroup.drgcalc"
-  },
-  "android": {
-    "package": "com.delrealgroup.drgcalc"
-  },
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
