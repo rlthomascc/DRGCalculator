@@ -569,24 +569,52 @@ function ownersTitlePolicyRight(num, callback) {
   }
 }
 
-
-function changeToPercent(num, callback) {
+changeDownToPercent = (num, callback) => {
   const price = num.split('');
   let join = '';
-  let number = '';
-  if (price[-1] !== '%') {
-    price.push('%');
-    join = price.join('');
-    number = join.slice(0, -1);
-    callback(number);
-  }
   if (price[-1] === '%') {
     callback(num);
+  } else {
+    price.push('%');
+    join = price.join('');
+    callback(join);
   }
-}
+};
+
+
+// changeToPercent = (num, callback) => {
+//   const price = num.split('');
+//   let join = '';
+//   let number = '';
+//   if (price[-1] !== '%') {
+//     price.push('%');
+//     join = price.join('');
+//     number = join.slice(0, -1);
+//     callback(number);
+//   }
+//   if (price[-1] === '%') {
+//     callback(num);
+//   }
+// };
+
+
+changeToPercent = (num, callback) => {
+  console.log(num, 'num in change');
+  const price = num.split('');
+  let join = '';
+  const number = '';
+  if (price[price.length - 1] === '%') {
+    callback(num);
+  } else {
+    price.push('%');
+    join = price.join('');
+    console.log(join, 'join in change');
+    callback(join);
+  }
+};
 
 const funcs = {
-  lenderTitlePolicyLeft, lenderTitlePolicyRight, escrowFeeRight, escrowFeeLeft, ownersTitlePolicyLeft, ownersTitlePolicyRight, changeToPercent,
+  lenderTitlePolicyLeft, lenderTitlePolicyRight, escrowFeeRight, escrowFeeLeft, ownersTitlePolicyLeft, ownersTitlePolicyRight, changeToPercent, changeDownToPercent,
 };
 
 module.exports.funcs = funcs;

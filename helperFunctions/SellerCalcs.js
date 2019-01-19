@@ -1,6 +1,9 @@
 const Helpers = require('../helperFunctions/helpers');
 
-calculateAll = (home, broker, taxes, interest, callback) => {
+calculateAll = (home, brokerPrice, taxes, interest, callback) => {
+  let broker = '';
+  const bringBrokerBack = (price => broker = price);
+  Helpers.funcs.changeToPercent(brokerPrice, bringBrokerBack);
   const brokerPercent = broker.slice(0, -1);
   const brokerDecimal = brokerPercent / 100;
   const brokerFee = home * brokerDecimal / 2; // <====== BROKER FEE 6% / 2

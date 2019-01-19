@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 42482,
+  "expoServerNgrokUrl": "https://n9-upx.rl-thomas.drgcalculator.exp.direct",
+  "packagerNgrokUrl": "https://packager.n9-upx.rl-thomas.drgcalculator.exp.direct",
+  "ngrokPid": 42496
 }
