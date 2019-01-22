@@ -44,5 +44,5 @@ export default createMaterialBottomTabNavigator({
 {
   initialRouteName: 'Form',
   activeTintColor: '#cda135',
-  // shifting: true, // MAKES THE COLOR OF BACKGROUND THE ACTIVE TINT COLOR
+  // shifting: true, // MAKES THE COLOR OF BACKGROUND THE ACTIVE TINT COLORr
 });

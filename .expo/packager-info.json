@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 50432,
-  "expoServerNgrokUrl": "https://pw-cwp.rl-thomas.drgcalculator.exp.direct",
-  "packagerNgrokUrl": "https://packager.pw-cwp.rl-thomas.drgcalculator.exp.direct",
-  "ngrokPid": 50453
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null
 }
