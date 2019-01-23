@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "delrealgroupcalc",
+    "name": "DRGCalculator",
     "slug": "delrealgroupcalcslug",
     "privacy": "public",
     "sdkVersion": "32.0.0",
@@ -10,9 +10,9 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "assets/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -24,10 +24,10 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.delrealgroup.delrealgroupcalc"
+      "bundleIdentifier": "com.delrealgroup.DRGCalculator"
     },
     "android": {
-      "package": "com.delrealgroup.delrealgroupcalc"
+      "package": "com.delrealgroup.DRGCalculator"
     }
   }
 }

@@ -169,7 +169,7 @@ class AboutUs extends Component {
               }}
             />
 
-            <View style={{ flex: 1, flexDirection: 'row' }}>
+            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}>
               <TouchableHighlight onPress={() => this.goToCall()}>
                 <Image
                   style={{ width: 150, height: 150, justifyContent: 'center' }}
@@ -194,7 +194,7 @@ class AboutUs extends Component {
                     For Accurate data please consult your Real Estate Agent and/or Lender.
                 {'\n'}
                 {'\n'}
-                    DRE Agent Lic. No. 01423976 | The Del Real Group 2019
+                    DRE Agent Lic. No. 01423976 | The Del Real Group 2019 | Built V. 1.2
               </Text>
             </View>
 
