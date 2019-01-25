@@ -194,7 +194,9 @@ class AboutUs extends Component {
                     For Accurate data please consult your Real Estate Agent and/or Lender.
                 {'\n'}
                 {'\n'}
-                    DRE Agent Lic. No. 01423976 | The Del Real Group 2019 | Built V. 1.2
+                    DRE Agent Lic. No. 01423976 | The Del Real Group 2019 | 
+                {'\n'}
+                    Build V. 1.3
               </Text>
             </View>
 

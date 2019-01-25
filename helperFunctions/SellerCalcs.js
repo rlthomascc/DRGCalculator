@@ -11,7 +11,8 @@ calculateAll = (home, brokerPrice, taxes, interest, callback) => {
   const balance = home - home; // <==== BALANCE
   let escrowFee = '';
   let ownersTitlePolicy = '';
-  const countyTransferTax = 0;// 'FIGURE ME OUT';
+  // const countyTransferTax = 0;
+  const countyTransferTax = ((home * 0.0132) / 12);
 
   const escrowBack = price => escrowFee = price;
   if (home >= 0 && home <= 509999) {
