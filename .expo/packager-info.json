@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 75714,
-  "expoServerNgrokUrl": "https://7d-um2.rl-thomas.drgcalculator.exp.direct",
-  "packagerNgrokUrl": "https://packager.7d-um2.rl-thomas.drgcalculator.exp.direct",
-  "ngrokPid": 75734
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null
 }
